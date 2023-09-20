@@ -1,5 +1,6 @@
 package entities;
 
-public class Caixa {
+public class Caixa extends Funcionario{
+    
     
 }

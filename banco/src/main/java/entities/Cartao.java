@@ -10,4 +10,7 @@ public class Cartao {
     private int cvv;
     private Date dataValidade;
     private boolean credito;
+    private boolean debito;
+
+    
 }

@@ -8,7 +8,7 @@ public class Gerente extends Funcionario{
     private String departamento;
     private Agencia agencia;
     
-
+// Gerente responsável por vários clientes
     
     
 }
