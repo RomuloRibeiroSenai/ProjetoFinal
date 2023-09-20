@@ -10,6 +10,7 @@ public abstract class Pessoa {
     private String login;
     private String senha;
     private Endereco endereco;
+    
     public Pessoa(String nome, String cpf, String data_nasc, String login, String senha,
             Endereco endereco) {
         this.nome = nome;

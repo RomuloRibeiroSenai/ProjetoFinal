@@ -2,10 +2,10 @@ package entities;
 import java.util.ArrayList;
 import java.util.Random;
 
-import enums.UnidadeFederal;
+
 import interfaces.Cadastro;
-import lombok.Data;
-import lombok.Getter;
+//import lombok.Data;
+
 
 //@Data
 public class Cliente extends Pessoa implements Cadastro{

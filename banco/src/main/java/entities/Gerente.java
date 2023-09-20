@@ -1,9 +1,8 @@
 package entities;
 
 import enums.Agencia;
-import enums.UnidadeFederal;
 import interfaces.Cadastro;
-import lombok.Data;
+//import lombok.Data;
 
 //@Data
 public class Gerente extends Funcionario implements Cadastro{
@@ -11,8 +10,10 @@ public class Gerente extends Funcionario implements Cadastro{
     private Agencia agencia;
 
     public Gerente(String nome, String cpf, String data_nasc, String login, String senha,
-            Endereco endereco) {
-        super(nome, cpf, data_nasc, login, senha, endereco);
+            Endereco endereco, double salario, String cpts, String departamento, Agencia agencia) {
+        super(nome, cpf, data_nasc, login, senha, endereco, salario, cpts);
+        this.departamento = departamento;
+        this.agencia = agencia;
     }
 
     @Override
