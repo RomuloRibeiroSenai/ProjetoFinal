@@ -1,8 +1,10 @@
 package entities;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 
+import enums.UnidadeFederal;
 import interfaces.Cadastro;
 //import lombok.Data;
 
@@ -29,7 +31,33 @@ public class Cliente extends Pessoa implements Cadastro{
     
     @Override
     public void criar() {
-        // faz nada 
+        Scanner sc = new Scanner(System.in);
+        //  Cliente raquel = new Cliente("raquel", "121", "01/01/01", "raquel", "raquel", teste, 10000, "Corrente", "Anderson");
+        String nome,cpf,data_nac,login,senha,tipo_conta,gerente;
+        double saldo;
+        System.out.println("Digite o nome: ");
+        nome = sc.nextLine();
+        System.out.println("cpf: ");
+        cpf = sc.nextLine();
+        System.out.println("data:");
+        data_nac = sc.nextLine();
+        System.out.println("login:");
+        login = sc.nextLine();
+        System.out.println("senha: ");
+        senha = sc.nextLine();
+        System.out.println("saldo");
+        saldo = sc.nextDouble();
+        System.out.println("tipo de conta:");
+        tipo_conta = sc.nextLine();
+        System.out.println("gerente");
+        gerente = sc.nextLine();
+        Endereco teste = new Endereco("Bingen", "Rua bingen", 0, "nada", "Petropolis", "25-556550", UnidadeFederal.RJ);
+        Cliente cliente = new Cliente(nome,cpf,data_nac,login,senha,teste,saldo, tipo_conta,gerente);
+        getLista_cliente().add(cliente);
+
+
+
+
     }
 
     @Override
@@ -39,6 +67,19 @@ public class Cliente extends Pessoa implements Cadastro{
     @Override
     public void excluir() {
         // faz nada
+        Scanner sc = new Scanner(System.in);
+        String login_digitado,senha_digitada;
+        System.out.println("login");
+        login_digitado= sc.nextLine();
+        System.out.println("senha");
+        senha_digitada = sc.nextLine();
+        for (int i = 0; i < getLista_cliente().size(); i++) {
+            if (login_digitado.equalsIgnoreCase(getLista_cliente().get(i).getLogin())&& senha_digitada.equals(getLista_cliente().get(i).getSenha())) {
+                getLista_cliente().get(i).getGerente();
+
+            }
+
+        }
     }
 
     @Override

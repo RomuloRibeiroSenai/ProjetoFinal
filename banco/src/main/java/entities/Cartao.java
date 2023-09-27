@@ -3,7 +3,7 @@ package entities;
 import java.util.Date;
 
 import lombok.Data;
-@Data
+//@Data
 public class Cartao {
     private Cliente cliente;
     private int numeroCartao;

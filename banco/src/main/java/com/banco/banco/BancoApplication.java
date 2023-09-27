@@ -7,6 +7,8 @@ import entities.Cliente;
 import entities.Endereco;
 import enums.UnidadeFederal;
 
+import java.util.Arrays;
+
 @SpringBootApplication
 public class BancoApplication {
 
@@ -16,6 +18,8 @@ public class BancoApplication {
       Cliente raquel = new Cliente("raquel", "121", "01/01/01", "raquel", "raquel", teste, 10000, "Corrente", "Anderson");
       raquel.getLista_cliente().add(raquel);
       raquel.ver();
+
+
 	}
 
 }
