@@ -13,7 +13,7 @@ public class menu_inicial {
         System.out.println("Seja bem-vindo!");
         System.out.println("Digite 1. para entrar no menu de funcionarios\n 2. para entrar no menu de cliente");
         escolha = sc.nextInt();
-        if (escolha ==1 ) {
+        if (escolha == 1) {
             String login_digitado,senha_digitada;
 
             //conferir o login e senha e achar qual cargo da pessoa 
@@ -50,8 +50,7 @@ public class menu_inicial {
             int escolha;
             System.out.println("1.Ver saldo\n2.Depositar\n3.Sacar");
             sc.next();
-            escolha = sc.nextInt();
-         
+            escolha = sc.nextInt();      
             return escolha;
         }
     }

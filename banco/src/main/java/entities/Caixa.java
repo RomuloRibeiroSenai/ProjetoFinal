@@ -215,4 +215,29 @@ public class Caixa extends Funcionario {
         }
     }
 
+    @Override
+    public void saldo() {
+        
+    }
+
+    @Override
+    public void deposito() {
+        
+    }
+
+    @Override
+    public void saque() {
+        
+    }
+
+    @Override
+    public void extrato() {
+        
+    }
+
+    @Override
+    public void transferencia() {
+       
+    }
+
 }

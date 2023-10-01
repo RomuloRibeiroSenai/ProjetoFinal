@@ -18,8 +18,6 @@ public interface Login {
         for (int i = 0; i < getLista_cliente().size(); i++) {
             if (username.equalsIgnoreCase(getLista_cliente().get(i).getNome()) && senha.equals(getLista_cliente().get(i).getSenha())) {
                 return "cliente";
-
-
             }
 
         }
