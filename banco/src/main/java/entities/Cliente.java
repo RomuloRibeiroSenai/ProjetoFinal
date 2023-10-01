@@ -24,7 +24,7 @@ public class Cliente extends Pessoa implements Cadastro{
     private double [] historico = {};
     
     public Cliente(String nome, String cpf, String data_nasc, String login, String senha,
-    Endereco endereco, double saldo, String tipoConta, String gerente, boolean ativo, int[] historico) {
+    Endereco endereco, double saldo, String tipoConta, String gerente, boolean ativo, double[] historico) {
         super(nome, cpf, data_nasc, login, senha, endereco, ativo);
         this.saldo = saldo;
         this.tipoConta = tipoConta;
@@ -111,32 +111,38 @@ public class Cliente extends Pessoa implements Cadastro{
     
     @Override
     public void deposito() {
-        // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'deposito'");
+        double valor;
+        String cpf;
+        System.out.println("Para qual cpf você deseja transferir? ");
+        cpf = sc.nextLine();
+        System.out.println("Digite o valor: ");
+        valor = sc.nextDouble();
+        for (int i = 0; i < getLista_cliente().size(); i++) {
+            if (cpf.equals(getLista_cliente().get(i).getCpf())) {
+            getLista_cliente().get(i).setSaldo((getLista_cliente().get(i).getSaldo()) + valor);
+            System.out.println("Deposito realizado com sucesso:");
+
+            }else{
+                System.out.println("Conta inexistente.");
+            }
+            
+        }
+
     }
     
     @Override
     public void saque() {
         //criar saque e jogar dentro do historico 
-        String cpf;
         double valor;
-        System.out.println("Digite o CPF que você deseja fazer a transferência: ");
-        cpf = sc.nextLine();
         System.out.println("Digite o valor: ");
-        sc.next();
         valor = sc.nextDouble();
         if (valor <= this.saldo) {
-            
-        for (int i = 0; i <getLista_cliente().size(); i++) {
-            if (cpf.equals(getLista_cliente().get(i).getCpf())) {
+            this.saldo -= valor;
                 System.out.println("valor transferido com sucesso: ");
-                getLista_cliente().get(i).setSaldo((getLista_cliente().get(i).getSaldo()) + valor);
                 this.setHistorico(-valor);
-            }else{
-                System.out.println("conta inexistente");
-            }
-            
-        }
+           
+        }else{
+            System.out.println("Saldo insuficiente.");
         }
      
         

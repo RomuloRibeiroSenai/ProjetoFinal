@@ -8,8 +8,8 @@ public class Caixa extends Funcionario {
     Scanner sc = new Scanner(System.in);
 
     public Caixa(String nome, String cpf, String data_nasc, String login, String senha,
-            Endereco endereco, double salario, String cpts, boolean ativo) {
-        super(nome, cpf, data_nasc, login, senha, endereco, salario, cpts, ativo);
+            Endereco endereco, double salario, String cpts, boolean ativo, String cargo) {
+        super(nome, cpf, data_nasc, login, senha, endereco, salario, cpts, ativo, cargo);
     }
 
     @Override
@@ -18,6 +18,7 @@ public class Caixa extends Funcionario {
         double saldo;
         int numero;
         UnidadeFederal uf;
+        double [] historico = {};
         boolean ativo = true;
         System.out.println("Digite o nome: ");
         nome = sc.nextLine();
@@ -53,7 +54,7 @@ public class Caixa extends Funcionario {
         uf = UnidadeFederal.valueOf(uf_string);
 
         Endereco teste = new Endereco(bairro, rua, numero, complemento, cidade, cep, uf);
-        Cliente cliente = new Cliente(nome, cpf, data_nac, login, senha, teste, saldo, tipo_conta, gerente, ativo);
+        Cliente cliente = new Cliente(nome, cpf, data_nac, login, senha, teste, saldo, tipo_conta, gerente, ativo,historico);
         Cliente.getLista_cliente().add(cliente);
     }
 

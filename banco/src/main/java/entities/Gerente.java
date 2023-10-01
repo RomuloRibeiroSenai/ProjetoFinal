@@ -10,17 +10,33 @@ import interfaces.Cadastro;
 //@Data
 public class Gerente extends Funcionario {
     private String departamento;
-    private Agencia agencia;
-
+    
     Scanner sc = new Scanner(System.in);
-
+    
     public Gerente(String nome, String cpf, String data_nasc, String login, String senha,
-            Endereco endereco, double salario, String cpts, String departamento, Agencia agencia,boolean ativo) {
-        super(nome, cpf, data_nasc, login, senha, endereco, salario, cpts, ativo);
+    Endereco endereco, double salario, String cpts, String departamento, Agencia agencia,boolean ativo, String cargo) {
+        super(nome, cpf, data_nasc, login, senha, endereco, salario, cpts, ativo,cargo);
         this.departamento = departamento;
         this.agencia = agencia;
     }
+    
+    public String getDepartamento() {
+        return departamento;
+    }
 
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    private Agencia agencia;
+
+    public Agencia getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(Agencia agencia) {
+        this.agencia = agencia;
+    }
     @Override
     public void criar() {
         // for (int i = 0; i < getLista_funcionario().size(); i++) {
@@ -249,6 +265,66 @@ public class Gerente extends Funcionario {
     @Override
     public void transferencia() {
         
+    }
+    public void criar_funcionario(){
+    //nome,cpf,data_nasc,login,senha,Endereco endereco,double salario, String ctps, boolean ativo,cargo
+    
+    String nome,cpf,data_nasc,login,senha1,senha2,senha ="",ctps,cargo;
+    String rua,bairro,cidade,complemente,cep,uf;
+    double salario;
+    int numero;
+    UnidadeFederal uf1;
+    System.out.println("Digite o nome do funcionario:");
+    nome = sc.nextLine();
+    System.out.println("Digite o cpf:");
+    cpf = sc.nextLine();
+    System.out.println("Digite a data de nascimento:");
+    data_nasc = sc.nextLine();
+    System.out.println("Digite o login:");
+    login = sc.nextLine();
+    System.out.println("Digite uma senha:");
+    senha1 = sc.nextLine();
+    System.out.println("Digite a senha novamente: ");
+    senha2= sc.nextLine();
+    if (senha1.equals(senha2)) {
+        senha= sc.nextLine();
+    }else{
+        System.out.println("Senha invalida");
+    }
+    System.out.println("Digite a CTPS: ");
+    ctps = sc.nextLine();
+    System.out.println("Digite o cargo do funcionario: ");
+    cargo = sc.nextLine();
+    System.out.println("Digite o salario do funcionario: ");
+    sc.next();
+    salario = sc.nextDouble();
+    //rua bairro numero cidade complemente cep uf
+    System.out.println("Digite o seu estado: ");
+    uf = sc.nextLine().toUpperCase();
+    uf1 = UnidadeFederal.valueOf(uf);
+    System.out.println("Digite a cidade: ");
+    cidade = sc.nextLine();
+    System.out.println("Digite o bairro: ");
+    bairro = sc.nextLine();
+    System.out.println("Digite a rua: ");
+    rua = sc.nextLine();
+    System.out.println("Digite o numero");
+    sc.next();
+    numero = sc.nextInt();
+    System.out.println("Digite o complemento");
+    complemente = sc.nextLine();
+    System.out.println("Digite o CEP: "); 
+    cep = sc.nextLine();
+    Endereco endereco = new Endereco(bairro, rua, numero, complemente, cidade, cep, uf1);
+    if (cargo.equalsIgnoreCase("gerente")){
+        Gerente gerente = new Gerente(nome, cpf, data_nasc, login, senha, endereco, salario, cpf, cep, agencia, isAtivo(), cargo);
+        Funcionario.getLista_funcionario().add(gerente);
+        System.out.println("Operação realizada com sucesso");
+    } else {
+        Caixa caixa = new Caixa(nome, cpf, data_nasc, login, senha, endereco, salario, cpf, isAtivo(), cargo);
+        Funcionario.getLista_funcionario().add(caixa);
+        System.out.println("Operação realizada com sucesso");
+    }
     }
     
 // Gerente responsável por vários clientes
