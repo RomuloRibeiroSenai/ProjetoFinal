@@ -22,38 +22,17 @@ public class Cliente extends Pessoa implements Cadastro{
     private static ArrayList<Cliente> lista_cliente = new ArrayList<>();
     
     public Cliente(String nome, String cpf, String data_nasc, String login, String senha,
-            Endereco endereco, double saldo, String tipoConta, String gerente) {
-        super(nome, cpf, data_nasc, login, senha, endereco);
+            Endereco endereco, double saldo, String tipoConta, String gerente, boolean ativo) {
+            super(nome, cpf, data_nasc, login, senha, endereco, ativo);
             this.saldo = saldo;
             this.tipoConta = tipoConta;
             this.gerente = gerente;
+            
     }
     
     @Override
     public void criar() {
-        Scanner sc = new Scanner(System.in);
-        //  Cliente raquel = new Cliente("raquel", "121", "01/01/01", "raquel", "raquel", teste, 10000, "Corrente", "Anderson");
-        String nome,cpf,data_nac,login,senha,tipo_conta,gerente;
-        double saldo;
-        System.out.println("Digite o nome: ");
-        nome = sc.nextLine();
-        System.out.println("cpf: ");
-        cpf = sc.nextLine();
-        System.out.println("data:");
-        data_nac = sc.nextLine();
-        System.out.println("login:");
-        login = sc.nextLine();
-        System.out.println("senha: ");
-        senha = sc.nextLine();
-        System.out.println("saldo");
-        saldo = sc.nextDouble();
-        System.out.println("tipo de conta:");
-        tipo_conta = sc.nextLine();
-        System.out.println("gerente");
-        gerente = sc.nextLine();
-        Endereco teste = new Endereco("Bingen", "Rua bingen", 0, "nada", "Petropolis", "25-556550", UnidadeFederal.RJ);
-        Cliente cliente = new Cliente(nome,cpf,data_nac,login,senha,teste,saldo, tipo_conta,gerente);
-        getLista_cliente().add(cliente);
+
 
 
 

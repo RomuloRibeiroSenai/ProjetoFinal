@@ -15,7 +15,7 @@ public class BancoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BancoApplication.class, args);
       Endereco teste = new Endereco("Bingen", "Rua bingen", 0, "nada", "Petropolis", "25-556550", UnidadeFederal.RJ);
-      Cliente raquel = new Cliente("raquel", "121", "01/01/01", "raquel", "raquel", teste, 10000, "Corrente", "Anderson");
+      Cliente raquel = new Cliente("raquel", "121", "01/01/01", "raquel", "raquel", teste, 10000, "Corrente", "Anderson", true);
       raquel.getLista_cliente().add(raquel);
       raquel.ver();
 

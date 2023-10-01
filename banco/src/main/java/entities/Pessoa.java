@@ -10,15 +10,23 @@ public abstract class Pessoa {
     private String login;
     private String senha;
     private Endereco endereco;
+    private boolean ativo;
     
     public Pessoa(String nome, String cpf, String data_nasc, String login, String senha,
-            Endereco endereco) {
+    Endereco endereco, boolean ativo) {
         this.nome = nome;
         this.cpf = cpf;
         this.data_nasc = data_nasc;
         this.login = login;
         this.senha = senha;
         this.endereco = endereco;
+        this.ativo = ativo;
+    }
+    public boolean isAtivo() {
+        return ativo;
+    }
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
     public String getNome() {
         return nome;
@@ -56,4 +64,5 @@ public abstract class Pessoa {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
 }
