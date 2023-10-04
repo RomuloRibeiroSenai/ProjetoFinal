@@ -5,11 +5,13 @@ import java.util.Scanner;
 import enums.Agencia;
 import enums.UnidadeFederal;
 import interfaces.Cadastro;
-//import lombok.Data;
+import lombok.Data;
 
-//@Data
+// @Data
 public class Gerente extends Funcionario {
+    
     private String departamento;
+    private Agencia agencia;
     
     Scanner sc = new Scanner(System.in);
     
@@ -19,6 +21,7 @@ public class Gerente extends Funcionario {
         this.departamento = departamento;
         this.agencia = agencia;
     }
+   
     
     public String getDepartamento() {
         return departamento;
@@ -28,7 +31,6 @@ public class Gerente extends Funcionario {
         this.departamento = departamento;
     }
 
-    private Agencia agencia;
 
     public Agencia getAgencia() {
         return agencia;
@@ -326,8 +328,6 @@ public class Gerente extends Funcionario {
         System.out.println("Operação realizada com sucesso");
     }
     }
-    
-// Gerente responsável por vários clientes
-    
-    
+  
+// Gerente responsável por vários clientes   
 }

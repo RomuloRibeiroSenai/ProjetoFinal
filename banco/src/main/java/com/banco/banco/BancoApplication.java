@@ -8,7 +8,9 @@ import entities.Cliente;
 import entities.Endereco;
 import entities.Funcionario;
 import enums.UnidadeFederal;
+import menus.menu_inicial;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -17,12 +19,16 @@ public class BancoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BancoApplication.class, args);
       Endereco teste = new Endereco("Bingen", "Rua bingen", 0, "nada", "Petropolis", "25-556550", UnidadeFederal.RJ);
-      Caixa funcionario_base = new Caixa(null, null, null, null, null, teste, 0, null, false, null);
+      Caixa funcionario_base = new Caixa(null, null, null, "adm", "adm", teste, 0, null, false, "caixa");
       funcionario_base.getLista_funcionario().add(funcionario_base);
-      double [] historico = {};
+      // double [] historico = {};
+      ArrayList<Double> historico = new ArrayList<>();
       Cliente raquel = new Cliente("raquel", "121", "01/01/01", "raquel", "raquel", teste, 10000, "Corrente", "Anderson", true, historico);
-      raquel.getLista_cliente().add(raquel);
-      raquel.ver();
+      Cliente jose = new Cliente("jose", "222", "15/12/1988", "jose", "josefodao", teste, 200, "Poupança", "Anderson", true, historico);
+      Cliente.getLista_cliente().add(raquel);
+      Cliente.getLista_cliente().add(jose);
+      menu_inicial menu = new menu_inicial();
+      menu.menus();
       
        
 

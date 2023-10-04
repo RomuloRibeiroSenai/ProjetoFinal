@@ -10,7 +10,7 @@ public class menu_inicial {
     Scanner sc = new Scanner(System.in);
 
     public void menus() {
-
+        //add looping
         String login_digitado, senha_digitada;
         System.out.println("Seja bem-vindo!");
         System.out.println("Digite Login:");
@@ -18,6 +18,7 @@ public class menu_inicial {
         System.out.println("digite sua senha: ");
         senha_digitada = sc.nextLine();
         String tipo_menu = login(login_digitado, senha_digitada, Funcionario.getLista_funcionario(), Cliente.getLista_cliente());
+        System.out.println(tipo_menu);
 
         switch(tipo_menu){
             case "cliente":
@@ -30,7 +31,7 @@ public class menu_inicial {
                 this.menu_caixa(login_digitado, senha_digitada);
                 break;
             default:
-                System.out.println("Erro");
+                System.out.println("Erro!!!!!!!!!!!!!!");
                 break;
         }
     }
@@ -38,26 +39,34 @@ public class menu_inicial {
     public void menu_cliente(String login, String senha) {
         for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
             if (login.equals(Cliente.getLista_cliente().get(i).getLogin())){
-                System.out.println("1.Ver saldo\n2.Depositar\n3.Sacar\n4.Transferir\n5.Sair");
-                int escolha = sc.nextInt();
-                switch(escolha){
-                    case 1:
-                        Cliente.getLista_cliente().get(i).saldo();
-                        break;
-                    case 2:
-                        Cliente.getLista_cliente().get(i).deposito();
-                        break;
-                    case 3:
-                        Cliente.getLista_cliente().get(i).saque();
-                        break;
-                    case 4:
-                        Cliente.getLista_cliente().get(i).transferencia();
-                    case 5:
-                        System.out.println("Até Mais");
-                        break;
-                    default: 
-                        System.out.println("Opção inválida");
-                    
+                int escolha = 0;
+                while(escolha != 6){
+                    System.out.println("\n1.Ver saldo\n2.Depositar\n3.Sacar\n4.Transferir\n5.Extrato\n6.Sair");
+                    escolha = sc.nextInt();
+                    switch(escolha){
+                        case 1:
+                            Cliente.getLista_cliente().get(i).saldo();
+                            
+                            break;
+                        case 2:
+                            Cliente.getLista_cliente().get(i).deposito();
+                            break;
+                        case 3:
+                            Cliente.getLista_cliente().get(i).saque();
+                            break;
+                        case 4:
+                            Cliente.getLista_cliente().get(i).transferencia();
+                            break;
+                        case 5 :
+                            Cliente.getLista_cliente().get(i).extrato();
+                            break;
+                        case 6:
+                            System.out.println("Até Mais");
+                            break;
+                        default: 
+                            System.out.println("Opção inválida");
+                        
+                    }
                 }
                 break;
             }
@@ -94,6 +103,7 @@ public class menu_inicial {
                         break;
                     case 4:
                         System.out.println("Até mais");
+                        break;
                     default:
                         System.out.println("Opção Inválida");
                         break;
@@ -106,15 +116,16 @@ public class menu_inicial {
 
     public String login(String username, String senha, ArrayList<Funcionario> lista_funcionario, ArrayList<Cliente> lista_cliente){
         for (int i = 0; i < Funcionario.getLista_funcionario().size(); i++){
-            if ( username.equalsIgnoreCase(Funcionario.getLista_funcionario().get(i).getNome()) && senha.equals(Funcionario.getLista_funcionario().get(i).getSenha())){
-                if (Funcionario.getLista_funcionario().get(i).getClass().getSimpleName().equalsIgnoreCase("gerente")) // converte o tipo da classe pra string para comparar
-                return "gerente";
-            } else {
-                return "caixa";
-            }
+            if ( username.equalsIgnoreCase(Funcionario.getLista_funcionario().get(i).getLogin()) && senha.equalsIgnoreCase(Funcionario.getLista_funcionario().get(i).getSenha())){
+                if (Funcionario.getLista_funcionario().get(i).getCargo().equalsIgnoreCase("gerente")) {
+                    return "gerente";
+                } else if(Funcionario.getLista_funcionario().get(i).getCargo().equalsIgnoreCase("caixa")){
+                    return "caixa";
+                }
+            } 
         }
         for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
-            if (username.equalsIgnoreCase(Cliente.getLista_cliente().get(i).getNome()) && senha.equals(Cliente.getLista_cliente().get(i).getSenha())) {
+            if (username.equalsIgnoreCase(Cliente.getLista_cliente().get(i).getLogin()) && senha.equals(Cliente.getLista_cliente().get(i).getSenha())) {
                 return "cliente";
             }
         }

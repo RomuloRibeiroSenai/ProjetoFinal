@@ -13,6 +13,7 @@ import interfaces.Cadastro;
 public class Cliente extends Pessoa implements Cadastro{
     
     Scanner sc = new Scanner(System.in);
+    Scanner sc2 = new Scanner(System.in);
     
     private static ArrayList<Cliente> lista_cliente = new ArrayList<>();
     
@@ -21,26 +22,35 @@ public class Cliente extends Pessoa implements Cadastro{
     private static Random rand = new Random();
     private static double numeroConta = rand.nextDouble();
     private String gerente;
-    private double [] historico = {};
+    // private double [] historico = {};
+    private ArrayList<Double> historico = new ArrayList<>();
     
     public Cliente(String nome, String cpf, String data_nasc, String login, String senha,
-    Endereco endereco, double saldo, String tipoConta, String gerente, boolean ativo, double[] historico) {
+    Endereco endereco, double saldo, String tipoConta, String gerente, boolean ativo, ArrayList<Double> historico) {
         super(nome, cpf, data_nasc, login, senha, endereco, ativo);
         this.saldo = saldo;
         this.tipoConta = tipoConta;
         this.gerente = gerente;
         
     }
-    public double[] getHistorico() {
+    // public double[] getHistorico() {
+    //     return historico;
+    // }
+    
+    // public void setHistorico(double valor) {
+    //     double [] temp_list = this.historico;
+    //     temp_list[this.historico.length] = valor;
+    //     this.historico = temp_list;
+    // }
+    
+    public ArrayList<Double> getHistorico() {
         return historico;
     }
-    
+
     public void setHistorico(double valor) {
-        double [] temp_list = this.historico;
-        temp_list[this.historico.length] = valor;
-        this.historico = temp_list;
+        historico.add(valor);
     }
-    
+
     public double getSaldo() {
         return saldo;
     }
@@ -113,13 +123,15 @@ public class Cliente extends Pessoa implements Cadastro{
     public void deposito() {
         double valor;
         String cpf;
-        System.out.println("Para qual cpf você deseja transferir? ");
+        System.out.println("Para qual cpf você deseja depositar? ");
         cpf = sc.nextLine();
         System.out.println("Digite o valor: ");
-        valor = sc.nextDouble();
+        
+        valor = sc2.nextDouble(); // fazer um try catch
         for (int i = 0; i < getLista_cliente().size(); i++) {
             if (cpf.equals(getLista_cliente().get(i).getCpf())) {
             getLista_cliente().get(i).setSaldo((getLista_cliente().get(i).getSaldo()) + valor);
+            this.setHistorico(valor);
             System.out.println("Deposito realizado com sucesso:");
 
             }else{
@@ -151,9 +163,9 @@ public class Cliente extends Pessoa implements Cadastro{
 
     @Override
     public void extrato() {
-        if (historico.length > 0){
-        for (int i = 0; i < historico.length; i++) {
-            System.out.println("R$" + historico[i] + "\n");
+        if (historico.size() > 0){
+        for (int i = 0; i < historico.size(); i++) {
+            System.out.println("R$" + historico.get(i) + "\n");
         }} else {
             System.out.println("Sem operações ainda");
         }
@@ -165,9 +177,8 @@ public class Cliente extends Pessoa implements Cadastro{
         double valor;
         System.out.println("Para qual CPF você deseja enviar ?");
         recebedor_cpf = sc.nextLine();
-        sc.next();
         System.out.println("Qual o valor?");
-        valor = sc.nextDouble();
+        valor = sc2.nextDouble();
         if (valor <= this.saldo){
             for (int i = 0; i < getLista_cliente().size(); i++) {
                 if(recebedor_cpf.equals(getLista_cliente().get(i).getCpf())){

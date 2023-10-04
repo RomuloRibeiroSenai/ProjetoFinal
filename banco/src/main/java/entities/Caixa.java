@@ -1,11 +1,13 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import enums.UnidadeFederal;
 
 public class Caixa extends Funcionario {
     Scanner sc = new Scanner(System.in);
+    Scanner sc2 = new Scanner(System.in);
 
     public Caixa(String nome, String cpf, String data_nasc, String login, String senha,
             Endereco endereco, double salario, String cpts, boolean ativo, String cargo) {
@@ -14,11 +16,13 @@ public class Caixa extends Funcionario {
 
     @Override
     public void criar() {
+        
         String nome, cpf, data_nac, login, senha, tipo_conta, gerente, bairro, rua, complemento, cidade, cep, uf_string;
         double saldo;
         int numero;
         UnidadeFederal uf;
-        double [] historico = {};
+        // double [] historico = {};
+        ArrayList<Double> historico = new ArrayList<>();
         boolean ativo = true;
         System.out.println("Digite o nome: ");
         nome = sc.nextLine();
@@ -39,10 +43,8 @@ public class Caixa extends Funcionario {
         bairro = sc.nextLine();
         System.out.println("Rua:");
         rua = sc.nextLine();
-        System.out.println("Número");
-        sc.next();
-        numero = sc.nextInt(); // ficar atento pra ver se nao quebra
-        sc.next();
+        System.out.println("Número");     
+        numero = sc2.nextInt(); 
         System.out.println("Complemento:");
         complemento = sc.nextLine();
         System.out.println("Cidade: ");
