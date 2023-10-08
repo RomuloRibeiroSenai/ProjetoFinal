@@ -3,7 +3,6 @@ package entities;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import enums.UnidadeFederal;
 
 public class Caixa extends Funcionario {
     Scanner sc = new Scanner(System.in);
@@ -17,10 +16,9 @@ public class Caixa extends Funcionario {
     @Override
     public void criar() {
         
-        String nome, cpf, data_nac, login, senha, tipo_conta, gerente, bairro, rua, complemento, cidade, cep, uf_string;
+        String nome, cpf, data_nac, login, senha, tipo_conta, gerente, complemento,cep;
         double saldo;
         int numero;
-        UnidadeFederal uf;
         ArrayList<Double> historico = new ArrayList<>();
         boolean ativo = true;
         System.out.println("Digite o nome: ");
@@ -38,23 +36,15 @@ public class Caixa extends Funcionario {
         tipo_conta = sc.nextLine();
         System.out.println("gerente");
         gerente = sc.nextLine();
-        System.out.println("bairro");
-        bairro = sc.nextLine();
-        System.out.println("Rua:");
-        rua = sc.nextLine();
+        System.out.println("CEP:");
+        cep = sc.nextLine();       
+        Endereco teste = Endereco.getEnderecoByCep(cep);
         System.out.println("Número");     
         numero = sc2.nextInt(); 
+        teste.setNumero(numero);
         System.out.println("Complemento:");
         complemento = sc.nextLine();
-        System.out.println("Cidade: ");
-        cidade = sc.nextLine();
-        System.out.println("CEP:");
-        cep = sc.nextLine();
-        System.out.println("UF: ");
-        uf_string = sc.nextLine().toUpperCase();
-        uf = UnidadeFederal.valueOf(uf_string);
-
-        Endereco teste = new Endereco(bairro, rua, numero, complemento, cidade, cep, uf);
+        teste.setComplemento(complemento);
         Cliente cliente = new Cliente(nome, cpf, data_nac, login, senha, teste, saldo, tipo_conta, gerente, ativo,historico);
         Cliente.getLista_cliente().add(cliente);
     }
@@ -134,7 +124,7 @@ public class Caixa extends Funcionario {
                         case "rua":
                             System.out.println("Qual a rua desejada?");
                             String rua = sc.nextLine();
-                            Cliente.getLista_cliente().get(i).getEndereco().setRua(rua);
+                            Cliente.getLista_cliente().get(i).getEndereco().setLogradouro(rua);
                             ;
                             break;
                         case "numero":
@@ -152,7 +142,7 @@ public class Caixa extends Funcionario {
                         case "cidade":
                             System.out.println("Qual a cidade desejada?");
                             String cidade = sc.nextLine();
-                            Cliente.getLista_cliente().get(i).getEndereco().setCidade(cidade);
+                            Cliente.getLista_cliente().get(i).getEndereco().setLocalidade(cidade);
                             break;
                         case "cep":
                             System.out.println("Qual o CEP desejado?");
@@ -161,11 +151,9 @@ public class Caixa extends Funcionario {
                             ;
                             break;
                         case "uf":
-                            UnidadeFederal uf;
                             System.out.println("Qual a UF?");
                             String uf1 = sc.nextLine().toUpperCase();
-                            uf = UnidadeFederal.valueOf(uf1);
-                            Cliente.getLista_cliente().get(i).getEndereco().setUf(uf);
+                            Cliente.getLista_cliente().get(i).getEndereco().setUf(uf1);
                             break;
                         default:
                             System.out.println("Opção Inválida");

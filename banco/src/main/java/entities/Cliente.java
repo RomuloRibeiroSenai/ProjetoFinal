@@ -151,7 +151,7 @@ public class Cliente extends Pessoa implements Cadastro {
     }
 
     @Override
-    public void extrato() {
+    public void extrato() { // colocar no final o saldo + operaçoes 
         if (historico.size() > 0) {
             for (int i = 0; i < historico.size(); i++) {
                 System.out.println("R$" + historico.get(i));

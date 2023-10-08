@@ -1,68 +1,83 @@
 package entities;
 
-import enums.UnidadeFederal;
+import java.io.IOException;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
+
+
+import com.google.gson.Gson;
+
+import lombok.Data;
+
+@Data
 public class Endereco {
-    private String bairro;
-    private String rua;
-    private int numero;
-    private String complemento;
-    private String cidade;
-    private String cep;
-    private UnidadeFederal uf;
 
+    private String cep;
+    private String logradouro;
+    private String complemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
+    private int numero;
+
+    public static Endereco getEnderecoByCep(String cep){
+        Endereco endereco = new Endereco();
+        HttpGet request = new HttpGet("http://viacep.com.br/ws/"+ cep + "/json/");
     
-    public Endereco(String bairro, String rua, int numero, String complemento, String cidade, String cep,
-            UnidadeFederal uf) {
-        this.bairro = bairro;
-        this.rua = rua;
-        this.numero = numero;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.cep = cep;
-        this.uf = uf;
-    }
-    public String getBairro() {
-        return bairro;
-    }
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-    public String getRua() {
-        return rua;
-    }
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-    public int getNumero() {
-        return numero;
-    }
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-    public String getComplemento() {
-        return complemento;
-    }
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-    public String getCidade() {
-        return cidade;
-    }
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-    public String getCep() {
-        return cep;
-    }
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-    public UnidadeFederal getUf() {
-        return uf;
-    }
-    public void setUf(UnidadeFederal uf) {
-        this.uf = uf;
-    }
-    
+        try(CloseableHttpClient https = HttpClientBuilder.create().build();
+            CloseableHttpResponse resposta = https.execute(request))
+            {
+                HttpEntity entidade = resposta.getEntity();
+                String resultado = EntityUtils.toString(entidade);
+
+
+                Gson gsonado = new Gson();
+                endereco = gsonado.fromJson(resultado, Endereco.class);
+            } catch (IOException abaa){
+            abaa.printStackTrace();
+        }
+
+        return endereco;
 }
+}
+// public class Endereco {
+
+//     private String cep;
+//     private String logradouro;
+//     private String complemento;
+//     private String bairro;
+//     private String localidade;
+//     private String uf;
+
+//     public static Endereco getEnderecoByCep(String cep){
+//         Endereco local = new Endereco();
+//         /* mandar o cep pro via cep
+//         tratar a resposta
+//         montar o endereço
+//          */
+//         HttpGet request = new HttpGet("http://viacep.com.br/ws/"+ cep + "/json/");
+
+
+//         try(CloseableHttpClient https = HttpClientBuilder.create().build();
+//             CloseableHttpResponse resposta = https.execute(request))
+//             {
+//                 HttpEntity entidade = resposta.getEntity();
+//                 String resultado = EntityUtils.toString(entidade);
+//                 System.out.println(resultado);
+
+//                 Gson gsonado = new Gson();
+//                 local = gsonado.fromJson(resultado, Endereco.class);
+//                 local.setComplemento(null);
+//                 System.out.println(local);
+//             } catch (IOException abaa){
+//             abaa.printStackTrace();
+//         }
+
+//         return local;
+//     }
+// }

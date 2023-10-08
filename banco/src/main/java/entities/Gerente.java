@@ -3,7 +3,6 @@ package entities;
 import java.util.ArrayList;
 import java.util.Scanner;
 import enums.Agencia;
-import enums.UnidadeFederal;
 
 // @Data
 public class Gerente extends Funcionario {
@@ -46,10 +45,9 @@ public class Gerente extends Funcionario {
             }
         }
 
-        String nome, cpf, data_nac, login, senha, tipo_conta, gerente, bairro, rua, complemento, cidade, cep, uf_string;
+        String nome, cpf, data_nac, login, senha, tipo_conta, gerente,complemento,cep;
         double saldo;
         int numero;
-        UnidadeFederal uf;
         ArrayList<Double> historico = new ArrayList<>();
         boolean ativo = true;
         System.out.println("Digite o nome: ");
@@ -67,23 +65,17 @@ public class Gerente extends Funcionario {
         tipo_conta = sc.nextLine();
         System.out.println("gerente");
         gerente = sc.nextLine();
-        System.out.println("bairro");
-        bairro = sc.nextLine();
-        System.out.println("Rua:");
-        rua = sc.nextLine();
-        System.out.println("Número");
-        numero = sc2.nextInt();
-        System.out.println("Complemento:");
-        complemento = sc.nextLine();
-        System.out.println("Cidade: ");
-        cidade = sc.nextLine();
+  
         System.out.println("CEP:");
         cep = sc.nextLine();
-        System.out.println("UF: ");
-        uf_string = sc.nextLine().toUpperCase();
-        uf = UnidadeFederal.valueOf(uf_string);
+        Endereco teste = Endereco.getEnderecoByCep(cep);
+        System.out.println("Número");     
+        numero = sc2.nextInt(); 
+        teste.setNumero(numero);
+        System.out.println("Complemento:");
+        complemento = sc.nextLine();
+        teste.setComplemento(complemento);;
 
-        Endereco teste = new Endereco(bairro, rua, numero, complemento, cidade, cep, uf);
         Cliente cliente = new Cliente(nome, cpf, data_nac, login, senha, teste, saldo, tipo_conta, gerente, ativo,
                 historico);
         Cliente.getLista_cliente().add(cliente);
@@ -164,7 +156,7 @@ public class Gerente extends Funcionario {
                         case "rua":
                             System.out.println("Qual a rua desejada?");
                             String rua = sc.nextLine();
-                            Cliente.getLista_cliente().get(i).getEndereco().setRua(rua);
+                            Cliente.getLista_cliente().get(i).getEndereco().setLogradouro(rua);
                             ;
                             break;
                         case "numero":
@@ -182,7 +174,7 @@ public class Gerente extends Funcionario {
                         case "cidade":
                             System.out.println("Qual a cidade desejada?");
                             String cidade = sc.nextLine();
-                            Cliente.getLista_cliente().get(i).getEndereco().setCidade(cidade);
+                            Cliente.getLista_cliente().get(i).getEndereco().setLocalidade(cidade);
                             break;
                         case "cep":
                             System.out.println("Qual o CEP desejado?");
@@ -191,11 +183,9 @@ public class Gerente extends Funcionario {
                             ;
                             break;
                         case "uf":
-                            UnidadeFederal uf;
                             System.out.println("Qual a UF?");
                             String uf1 = sc.nextLine().toUpperCase();
-                            uf = UnidadeFederal.valueOf(uf1);
-                            Cliente.getLista_cliente().get(i).getEndereco().setUf(uf);
+                            Cliente.getLista_cliente().get(i).getEndereco().setUf(uf1);
                             break;
                         default:
                             System.out.println("Opção Inválida");
@@ -353,10 +343,9 @@ public class Gerente extends Funcionario {
         // boolean ativo,cargo
 
         String nome, cpf, data_nasc, login, senha1, senha2, senha = "", cargo;
-        String rua, bairro, cidade, complemente, cep, uf;
+        String  cep, complemento;
         double salario;
         int numero;
-        UnidadeFederal uf1;
         System.out.println("Digite o nome do funcionario:");
         nome = sc.nextLine();
         System.out.println("Digite o cpf:");
@@ -380,23 +369,17 @@ public class Gerente extends Funcionario {
         sc.next();
         salario = sc.nextDouble();
         // rua bairro numero cidade complemente cep uf
-        System.out.println("Digite o seu estado: ");
-        uf = sc.nextLine().toUpperCase();
-        uf1 = UnidadeFederal.valueOf(uf);
-        System.out.println("Digite a cidade: ");
-        cidade = sc.nextLine();
-        System.out.println("Digite o bairro: ");
-        bairro = sc.nextLine();
-        System.out.println("Digite a rua: ");
-        rua = sc.nextLine();
-        System.out.println("Digite o numero");
-        sc.next();
-        numero = sc.nextInt();
-        System.out.println("Digite o complemento");
-        complemente = sc.nextLine();
         System.out.println("Digite o CEP: ");
         cep = sc.nextLine();
-        Endereco endereco = new Endereco(bairro, rua, numero, complemente, cidade, cep, uf1);
+        Endereco endereco = Endereco.getEnderecoByCep(cep);
+        System.out.println("Digite o numero");
+        numero = sc2.nextInt();       
+        endereco.setNumero(numero);
+        System.out.println("Digite o complemento");
+        complemento = sc.nextLine();
+        endereco.setComplemento(complemento);
+
+        
         if (cargo.equalsIgnoreCase("gerente")) {
             Gerente gerente = new Gerente(nome, cpf, data_nasc, login, senha, endereco, salario, cpf, cep, agencia,
                     isAtivo(), cargo);
@@ -496,7 +479,7 @@ public class Gerente extends Funcionario {
                         case "rua":
                             System.out.println("Qual a rua desejada?");
                             String rua = sc.nextLine();
-                            Funcionario.getLista_funcionario().get(i).getEndereco().setRua(rua);
+                            Funcionario.getLista_funcionario().get(i).getEndereco().setLogradouro(rua);
                             ;
                             break;
                         case "numero":
@@ -514,7 +497,7 @@ public class Gerente extends Funcionario {
                         case "cidade":
                             System.out.println("Qual a cidade desejada?");
                             String cidade = sc.nextLine();
-                            Funcionario.getLista_funcionario().get(i).getEndereco().setCidade(cidade);
+                            Funcionario.getLista_funcionario().get(i).getEndereco().setLocalidade(cidade);
                             break;
                         case "cep":
                             System.out.println("Qual o CEP desejado?");
@@ -523,11 +506,9 @@ public class Gerente extends Funcionario {
                             ;
                             break;
                         case "uf":
-                            UnidadeFederal uf;
                             System.out.println("Qual a UF?");
                             String uf1 = sc.nextLine().toUpperCase();
-                            uf = UnidadeFederal.valueOf(uf1);
-                            Funcionario.getLista_funcionario().get(i).getEndereco().setUf(uf);
+                            Funcionario.getLista_funcionario().get(i).getEndereco().setUf(uf1);
                             break;
                         default:
                             System.out.println("Opção Inválida");
@@ -543,7 +524,7 @@ public class Gerente extends Funcionario {
 
     public void ver_lista_func() {
         for (int i = 0; i < Funcionario.getLista_funcionario().size(); i++) {
-            System.out.println(Funcionario.getLista_funcionario().get(i).getNome() + ""
+            System.out.println(Funcionario.getLista_funcionario().get(i).getNome() + " "
                     + Funcionario.getLista_funcionario().get(i).getCargo());
         }
     }
