@@ -11,7 +11,7 @@ public class Caixa extends Funcionario {
 
     public Caixa(String nome, String cpf, String data_nasc, String login, String senha,
             Endereco endereco, double salario, String cpts, boolean ativo, String cargo) {
-        super(nome, cpf, data_nasc, login, senha, endereco, salario, cpts, ativo, cargo);
+        super(nome, cpf, data_nasc, login, senha, endereco, salario, ativo, cargo);
     }
 
     @Override
@@ -21,7 +21,6 @@ public class Caixa extends Funcionario {
         double saldo;
         int numero;
         UnidadeFederal uf;
-        // double [] historico = {};
         ArrayList<Double> historico = new ArrayList<>();
         boolean ativo = true;
         System.out.println("Digite o nome: ");

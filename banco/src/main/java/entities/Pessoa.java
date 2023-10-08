@@ -1,7 +1,5 @@
 package entities;
 
-import enums.UnidadeFederal;
-import lombok.Data;
 //@Data
 public abstract class Pessoa {
     private String nome;

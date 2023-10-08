@@ -64,4 +64,5 @@ public class Endereco {
     public void setUf(UnidadeFederal uf) {
         this.uf = uf;
     }
+    
 }

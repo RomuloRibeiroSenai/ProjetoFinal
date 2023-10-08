@@ -7,6 +7,8 @@ import entities.Caixa;
 import entities.Cliente;
 import entities.Endereco;
 import entities.Funcionario;
+import entities.Gerente;
+import enums.Agencia;
 import enums.UnidadeFederal;
 import menus.menu_inicial;
 
@@ -25,8 +27,10 @@ public class BancoApplication {
       ArrayList<Double> historico = new ArrayList<>();
       Cliente raquel = new Cliente("raquel", "121", "01/01/01", "raquel", "raquel", teste, 10000, "Corrente", "Anderson", true, historico);
       Cliente jose = new Cliente("jose", "222", "15/12/1988", "jose", "josefodao", teste, 200, "Poupança", "Anderson", true, historico);
+      Gerente chefe = new Gerente("Chefe", "333", "22/11/99", "romulo", "romulo", teste, 200, null, null, Agencia.CENTRAL, true, "Gerente");
       Cliente.getLista_cliente().add(raquel);
       Cliente.getLista_cliente().add(jose);
+      Gerente.getLista_funcionario().add(chefe);
       menu_inicial menu = new menu_inicial();
       menu.menus();
       

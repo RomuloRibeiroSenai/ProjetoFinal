@@ -1,28 +1,27 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.Scanner;
-
 import enums.Agencia;
 import enums.UnidadeFederal;
-import interfaces.Cadastro;
-import lombok.Data;
 
 // @Data
 public class Gerente extends Funcionario {
-    
+
     private String departamento;
     private Agencia agencia;
-    
+
     Scanner sc = new Scanner(System.in);
-    
+    Scanner sc2 = new Scanner(System.in);
+
     public Gerente(String nome, String cpf, String data_nasc, String login, String senha,
-    Endereco endereco, double salario, String cpts, String departamento, Agencia agencia,boolean ativo, String cargo) {
-        super(nome, cpf, data_nasc, login, senha, endereco, salario, cpts, ativo,cargo);
+            Endereco endereco, double salario, String cpts, String departamento, Agencia agencia, boolean ativo,
+            String cargo) {
+        super(nome, cpf, data_nasc, login, senha, endereco, salario, ativo, cargo);
         this.departamento = departamento;
         this.agencia = agencia;
     }
-   
-    
+
     public String getDepartamento() {
         return departamento;
     }
@@ -31,7 +30,6 @@ public class Gerente extends Funcionario {
         this.departamento = departamento;
     }
 
-
     public Agencia getAgencia() {
         return agencia;
     }
@@ -39,295 +37,520 @@ public class Gerente extends Funcionario {
     public void setAgencia(Agencia agencia) {
         this.agencia = agencia;
     }
+
     @Override
     public void criar() {
-        // for (int i = 0; i < getLista_funcionario().size(); i++) {
-        //     if(this.getCpf().equals(getLista_funcionario().get(i).getCpf())){
-        //         Funcionario.getLista_funcionario().get(i).criar();
-        //     }
-        // }
-        Funcionario.getLista_funcionario().get(0).criar();
-        // String nome, cpf, data_nac, login, senha, tipo_conta, gerente, bairro, rua, complemento, cidade, cep, uf_string;
-        // double saldo;
-        // int numero;
-        // UnidadeFederal uf;
-        // boolean ativo = true;
-        // System.out.println("Digite o nome: ");
-        // nome = sc.nextLine();
-        // System.out.println("cpf: ");
-        // cpf = sc.nextLine();
-        // System.out.println("data:");
-        // data_nac = sc.nextLine();
-        // System.out.println("login:");
-        // login = sc.nextLine();
-        // System.out.println("senha: ");
-        // senha = sc.nextLine();
-        // saldo = 0;
-        // System.out.println("tipo de conta:");
-        // tipo_conta = sc.nextLine();
-        // System.out.println("gerente");
-        // gerente = sc.nextLine();
-        // System.out.println("bairro");
-        // bairro = sc.nextLine();
-        // System.out.println("Rua:");
-        // rua = sc.nextLine();
-        // System.out.println("Número");
-        // sc.next();
-        // numero = sc.nextInt(); // ficar atento pra ver se nao quebra
-        // sc.next();
-        // System.out.println("Complemento:");
-        // complemento = sc.nextLine();
-        // System.out.println("Cidade: ");
-        // cidade = sc.nextLine();
-        // System.out.println("CEP:");
-        // cep = sc.nextLine();
-        // System.out.println("UF: ");
-        // uf_string = sc.nextLine().toUpperCase();
-        // uf = UnidadeFederal.valueOf(uf_string);
+        for (int i = 0; i < getLista_funcionario().size(); i++) {
+            if (this.getCpf().equals(getLista_funcionario().get(i).getCpf())) {
+                Funcionario.getLista_funcionario().get(i).criar();
+            }
+        }
 
-        // Endereco teste = new Endereco(bairro, rua, numero, complemento, cidade, cep, uf);
-        // Cliente cliente = new Cliente(nome, cpf, data_nac, login, senha, teste, saldo, tipo_conta, gerente, ativo);
-        // Cliente.getLista_cliente().add(cliente);
+        String nome, cpf, data_nac, login, senha, tipo_conta, gerente, bairro, rua, complemento, cidade, cep, uf_string;
+        double saldo;
+        int numero;
+        UnidadeFederal uf;
+        ArrayList<Double> historico = new ArrayList<>();
+        boolean ativo = true;
+        System.out.println("Digite o nome: ");
+        nome = sc.nextLine();
+        System.out.println("cpf: ");
+        cpf = sc.nextLine();
+        System.out.println("data:");
+        data_nac = sc.nextLine();
+        System.out.println("login:");
+        login = sc.nextLine();
+        System.out.println("senha: ");
+        senha = sc.nextLine();
+        saldo = 0;
+        System.out.println("tipo de conta:");
+        tipo_conta = sc.nextLine();
+        System.out.println("gerente");
+        gerente = sc.nextLine();
+        System.out.println("bairro");
+        bairro = sc.nextLine();
+        System.out.println("Rua:");
+        rua = sc.nextLine();
+        System.out.println("Número");
+        numero = sc2.nextInt();
+        System.out.println("Complemento:");
+        complemento = sc.nextLine();
+        System.out.println("Cidade: ");
+        cidade = sc.nextLine();
+        System.out.println("CEP:");
+        cep = sc.nextLine();
+        System.out.println("UF: ");
+        uf_string = sc.nextLine().toUpperCase();
+        uf = UnidadeFederal.valueOf(uf_string);
+
+        Endereco teste = new Endereco(bairro, rua, numero, complemento, cidade, cep, uf);
+        Cliente cliente = new Cliente(nome, cpf, data_nac, login, senha, teste, saldo, tipo_conta, gerente, ativo,
+                historico);
+        Cliente.getLista_cliente().add(cliente);
     }
+
     @Override
     public void atualizar() {
-        Funcionario.getLista_funcionario().get(0).atualizar();
-        // String cpf;
-        // System.out.println("CPF do cliente: ");
-        // cpf = sc.nextLine();
-        // for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
-        //     if (cpf.equals(Cliente.getLista_cliente().get(i).getCpf())) {
-        //         int escolha = 0;
-        //         while (escolha != 1 || escolha != 2) {
-        //             System.out.println("1.Para mudar dados do cliente\n2.Para mudar dados do endereço do cliente");
-        //             escolha = sc.nextInt();
-        //         }
-        //         if (escolha == 1) {
-        //             String[] opcoes = { "Nome", "CPF", "Data de nascimento", "Login", "Senha", "Tipo Conta",
-        //                     "Gerente" };
-        //             for (int j = 0; j < opcoes.length; j++) {
-        //                 System.out.println(opcoes[j] + "\n");
-        //             }
-        //             String mudança = sc.nextLine().toLowerCase();
-        //             switch (mudança) {
-        //                 case "nome":
-        //                     System.out.println("Qual o nome desejado?");
-        //                     String nome = sc.nextLine();
-        //                     Cliente.getLista_cliente().get(i).setNome(nome);
-        //                     break;
-        //                 case "cpf":
-        //                     System.out.println("Qual o CPF desejado?");
-        //                     String cpf1 = sc.nextLine();
-        //                     Cliente.getLista_cliente().get(i).setCpf(cpf1);
-        //                     break;
-        //                 case "data de nascimento":
-        //                     System.out.println("Qual a data desejado?");
-        //                     String data = sc.nextLine();
-        //                     Cliente.getLista_cliente().get(i).setData_nasc(data);
-        //                     break;
-        //                 case "login":
-        //                     System.out.println("Qual o Login desejado?");
-        //                     String login = sc.nextLine();
-        //                     Cliente.getLista_cliente().get(i).setLogin(login);
-        //                     break;
-        //                 case "senha":
-        //                     System.out.println("Qual a senha desejada?");
-        //                     String senha = sc.nextLine();
-        //                     Cliente.getLista_cliente().get(i).setSenha(senha);
-        //                     break;
-        //                 case "tipo conta":
-        //                     System.out.println("Qual o tipo desejado?");
-        //                     String tipo = sc.nextLine();
-        //                     Cliente.getLista_cliente().get(i).setTipoConta(tipo);
-        //                     break;
-        //                 case "gerente":
-        //                     System.out.println("Qual o gerente?");
-        //                     String gerente = sc.nextLine();
-        //                     Cliente.getLista_cliente().get(i).setGerente(gerente);
-        //                     break;
-        //                 default:
-        //                     System.out.println("Opção Inválida");
-        //                     break;
-        //             }
-        //             break;
-        //         } else if (escolha == 2) {
-        //             String[] opcoes = { "Bairro", "Rua", "Número", "Complemento", "Cidade", "CEP", "UF" };
-        //             for (int j = 0; j < opcoes.length; j++) {
-        //                 System.out.println(opcoes[j] + "\n");
-        //             }
-        //             String mudança = sc.nextLine().toLowerCase();
-        //             switch (mudança) {
-        //                 case "bairro":
-        //                     System.out.println("Qual o bairro desejado?");
-        //                     String bairro = sc.nextLine();
-        //                     Cliente.getLista_cliente().get(i).getEndereco().setBairro(bairro);
-        //                     break;
-        //                 case "rua":
-        //                     System.out.println("Qual a rua desejada?");
-        //                     String rua = sc.nextLine();
-        //                     Cliente.getLista_cliente().get(i).getEndereco().setRua(rua);
-        //                     ;
-        //                     break;
-        //                 case "numero":
-        //                     System.out.println("Qual o numero desejado?");
-        //                     sc.next();
-        //                     int numero = sc.nextInt();
-        //                     sc.next();
-        //                     Cliente.getLista_cliente().get(i).getEndereco().setNumero(numero);
-        //                     break;
-        //                 case "complemento":
-        //                     System.out.println("Qual o complemento desejado?");
-        //                     String comp = sc.nextLine();
-        //                     Cliente.getLista_cliente().get(i).getEndereco().setComplemento(comp);
-        //                     break;
-        //                 case "cidade":
-        //                     System.out.println("Qual a cidade desejada?");
-        //                     String cidade = sc.nextLine();
-        //                     Cliente.getLista_cliente().get(i).getEndereco().setCidade(cidade);
-        //                     break;
-        //                 case "cep":
-        //                     System.out.println("Qual o CEP desejado?");
-        //                     String cep = sc.nextLine();
-        //                     Cliente.getLista_cliente().get(i).getEndereco().setCep(cep);
-        //                     ;
-        //                     break;
-        //                 case "uf":
-        //                     UnidadeFederal uf;
-        //                     System.out.println("Qual a UF?");
-        //                     String uf1 = sc.nextLine().toUpperCase();
-        //                     uf = UnidadeFederal.valueOf(uf1);
-        //                     Cliente.getLista_cliente().get(i).getEndereco().setUf(uf);
-        //                     break;
-        //                 default:
-        //                     System.out.println("Opção Inválida");
-        //                     break;
-        //             }
-        //         } else {
-        //             System.out.println("Opção Inválida");
-        //         }
-        //     }
-        // }
+        String cpf;
+        System.out.println("CPF do cliente: ");
+        cpf = sc.nextLine();
+        for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
+            if (cpf.equals(Cliente.getLista_cliente().get(i).getCpf())) {
+                int escolha = 0;
+                while (escolha != 1 || escolha != 2) {
+                    System.out.println("1.Para mudar dados do cliente\n2.Para mudar dados do endereço do cliente");
+                    escolha = sc.nextInt();
+                }
+                if (escolha == 1) {
+                    String[] opcoes = { "Nome", "CPF", "Data de nascimento", "Login", "Senha", "Tipo Conta",
+                            "Gerente" };
+                    for (int j = 0; j < opcoes.length; j++) {
+                        System.out.println(opcoes[j] + "\n");
+                    }
+                    String mudança = sc.nextLine().toLowerCase();
+                    switch (mudança) {
+                        case "nome":
+                            System.out.println("Qual o nome desejado?");
+                            String nome = sc.nextLine();
+                            Cliente.getLista_cliente().get(i).setNome(nome);
+                            break;
+                        case "cpf":
+                            System.out.println("Qual o CPF desejado?");
+                            String cpf1 = sc.nextLine();
+                            Cliente.getLista_cliente().get(i).setCpf(cpf1);
+                            break;
+                        case "data de nascimento":
+                            System.out.println("Qual a data desejado?");
+                            String data = sc.nextLine();
+                            Cliente.getLista_cliente().get(i).setData_nasc(data);
+                            break;
+                        case "login":
+                            System.out.println("Qual o Login desejado?");
+                            String login = sc.nextLine();
+                            Cliente.getLista_cliente().get(i).setLogin(login);
+                            break;
+                        case "senha":
+                            System.out.println("Qual a senha desejada?");
+                            String senha = sc.nextLine();
+                            Cliente.getLista_cliente().get(i).setSenha(senha);
+                            break;
+                        case "tipo conta":
+                            System.out.println("Qual o tipo desejado?");
+                            String tipo = sc.nextLine();
+                            Cliente.getLista_cliente().get(i).setTipoConta(tipo);
+                            break;
+                        case "gerente":
+                            System.out.println("Qual o gerente?");
+                            String gerente = sc.nextLine();
+                            Cliente.getLista_cliente().get(i).setGerente(gerente);
+                            break;
+                        default:
+                            System.out.println("Opção Inválida");
+                            break;
+                    }
+                    break;
+                } else if (escolha == 2) {
+                    String[] opcoes = { "Bairro", "Rua", "Número", "Complemento", "Cidade", "CEP", "UF" };
+                    for (int j = 0; j < opcoes.length; j++) {
+                        System.out.println(opcoes[j] + "\n");
+                    }
+                    String mudança = sc.nextLine().toLowerCase();
+                    switch (mudança) {
+                        case "bairro":
+                            System.out.println("Qual o bairro desejado?");
+                            String bairro = sc.nextLine();
+                            Cliente.getLista_cliente().get(i).getEndereco().setBairro(bairro);
+                            break;
+                        case "rua":
+                            System.out.println("Qual a rua desejada?");
+                            String rua = sc.nextLine();
+                            Cliente.getLista_cliente().get(i).getEndereco().setRua(rua);
+                            ;
+                            break;
+                        case "numero":
+                            System.out.println("Qual o numero desejado?");
+                            sc.next();
+                            int numero = sc.nextInt();
+                            sc.next();
+                            Cliente.getLista_cliente().get(i).getEndereco().setNumero(numero);
+                            break;
+                        case "complemento":
+                            System.out.println("Qual o complemento desejado?");
+                            String comp = sc.nextLine();
+                            Cliente.getLista_cliente().get(i).getEndereco().setComplemento(comp);
+                            break;
+                        case "cidade":
+                            System.out.println("Qual a cidade desejada?");
+                            String cidade = sc.nextLine();
+                            Cliente.getLista_cliente().get(i).getEndereco().setCidade(cidade);
+                            break;
+                        case "cep":
+                            System.out.println("Qual o CEP desejado?");
+                            String cep = sc.nextLine();
+                            Cliente.getLista_cliente().get(i).getEndereco().setCep(cep);
+                            ;
+                            break;
+                        case "uf":
+                            UnidadeFederal uf;
+                            System.out.println("Qual a UF?");
+                            String uf1 = sc.nextLine().toUpperCase();
+                            uf = UnidadeFederal.valueOf(uf1);
+                            Cliente.getLista_cliente().get(i).getEndereco().setUf(uf);
+                            break;
+                        default:
+                            System.out.println("Opção Inválida");
+                            break;
+                    }
+                } else {
+                    System.out.println("Opção Inválida");
+                }
+            }
+        }
     }
+
     @Override
     public void excluir() {
-        Funcionario.getLista_funcionario().get(0).excluir();
-        // String cpf_digitado;
-        // System.out.println("Digite o nome da pessoa que deseja excluir");
-        // cpf_digitado = sc.nextLine();
-        // for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
-        //     if (cpf_digitado.equalsIgnoreCase(Cliente.getLista_cliente().get(i).getCpf())) {
-        //         // add metodo para inativar o cliente
-        //         Cliente.getLista_cliente().get(i).setAtivo(false);
 
-        //     }
+        String cpf_digitado;
+        System.out.println("Digite o nome da pessoa que deseja excluir");
+        cpf_digitado = sc.nextLine();
+        for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
+            if (cpf_digitado.equalsIgnoreCase(Cliente.getLista_cliente().get(i).getCpf())) {
+                // add metodo para inativar o cliente
+                Cliente.getLista_cliente().get(i).setAtivo(false);
 
-        // }
+            }
+
+        }
     }
+
     @Override
     public void ver() {
-        Funcionario.getLista_funcionario().get(0).ver();
-        // String cpf_digitado;
-        // System.out.println("Digite o nome do cliente que você deseja acessar as informações:");
-        // cpf_digitado = sc.nextLine();
-        // for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
-        //     if (cpf_digitado.equalsIgnoreCase(Cliente.getLista_cliente().get(i).getCpf())) {
-        //         // verificar como vai ficar as infos quando chamar esse metodo.
-        //         System.out.println(Cliente.getLista_cliente().get(i).getNome());
-        //         System.out.println(Cliente.getLista_cliente().get(i).getData_nasc());
-        //         System.out.println(Cliente.getLista_cliente().get(i).getCpf());
-        //         System.out.println(Cliente.getLista_cliente().get(i).getEndereco());
-        //         System.out.println(Cliente.getLista_cliente().get(i).getTipoConta());
-        //         System.out.println(Cliente.getLista_cliente().get(i).getGerente());
-        //         System.out.println(Cliente.getLista_cliente().get(i).getSaldo());
-        //     }
 
-        // }
+        String cpf_digitado;
+        System.out.println("Digite o CPF do cliente que você deseja acessar as informações:");
+        cpf_digitado = sc.nextLine();
+        for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
+            if (cpf_digitado.equalsIgnoreCase(Cliente.getLista_cliente().get(i).getCpf())) {
+                // verificar como vai ficar as infos quando chamar esse metodo.
+                System.out.println(Cliente.getLista_cliente().get(i).getNome());
+                System.out.println(Cliente.getLista_cliente().get(i).getData_nasc());
+                System.out.println(Cliente.getLista_cliente().get(i).getCpf());
+                System.out.println(Cliente.getLista_cliente().get(i).getEndereco());
+                System.out.println(Cliente.getLista_cliente().get(i).getTipoConta());
+                System.out.println(Cliente.getLista_cliente().get(i).getGerente());
+                System.out.println(Cliente.getLista_cliente().get(i).getSaldo());
+            }
+
+        }
     }
 
     @Override
     public void saldo() {
-        
-    }
+        System.out.println("Qual o CPF que deseja ver?");
+        String cpf = sc.nextLine();
 
-    @Override
-    public void deposito() {
-        
-    }
-
-    @Override
-    public void saque() {
-        
+        for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
+            if (cpf.equals(Cliente.getLista_cliente().get(i).getCpf())) {
+                System.out.println("R$:" + Cliente.getLista_cliente().get(i).getSaldo());
+            }
+        }
     }
 
     @Override
     public void extrato() {
-        
+        System.out.println("Qual o CPF que deseja ver?");
+        String cpf = sc.nextLine();
+
+        for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
+            if (cpf.equals(Cliente.getLista_cliente().get(i).getCpf())) {
+                if (Cliente.getLista_cliente().get(i).getHistorico().size() > 0) {
+                    for (int j = 0; j < Cliente.getLista_cliente().get(i).getHistorico().size(); j++) {
+                        System.out.println("R$" + Cliente.getLista_cliente().get(i).getHistorico().get(j));
+                    }
+                } else {
+                    System.out.println("Sem operações ainda");
+                }
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void deposito() {
+        double valor;
+        String cpf;
+        System.out.println("Para qual cpf você deseja depositar? ");
+        cpf = sc.nextLine();
+        System.out.println("Digite o valor: ");
+
+        valor = sc2.nextDouble(); // fazer um try catch
+        for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
+            if (cpf.equals(Cliente.getLista_cliente().get(i).getCpf())) {
+                Cliente.getLista_cliente().get(i).setSaldo((Cliente.getLista_cliente().get(i).getSaldo()) + valor);
+                Cliente.getLista_cliente().get(i).setHistorico(valor);
+                System.out.println("\nDeposito realizado com sucesso:");
+                return;
+            } 
+        }
+        System.out.println("\nConta inexistente.");
+    }
+
+
+
+    @Override
+    public void saque() {
+        System.out.println("Qual o CPF que deseja ver?");
+        String cpf = sc.nextLine();
+        System.out.println("Valor a sacar R$:");
+        double valor = sc2.nextDouble();
+
+        for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
+            if (Cliente.getLista_cliente().get(i).getCpf().equals(cpf)) {
+                if (Cliente.getLista_cliente().get(i).getSaldo() > valor) {
+                    Cliente.getLista_cliente().get(i).setSaldo(Cliente.getLista_cliente().get(i).getSaldo() - valor);
+                    Cliente.getLista_cliente().get(i).setHistorico(-valor);
+                } else {
+                    System.out.println("Saldo insuficiente");
+                }
+            }
+        }
     }
 
     @Override
     public void transferencia() {
-        
+        System.out.println("Qual o CPF que deseja mandar a transferencia?");
+        String cpf = sc.nextLine();
+        System.out.println("Qual o CPF que deseja receber a transferencia?");
+        String cpf2 = sc.nextLine();
+
+        for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
+            if (Cliente.getLista_cliente().get(i).getCpf().equals(cpf)) {
+                for (int j = 0; j < Cliente.getLista_cliente().size(); j++) {
+                    if (Cliente.getLista_cliente().get(j).getCpf().equals(cpf2)) {
+                        System.out.println("R$:");
+                        double valor = sc2.nextDouble();
+                        if (Cliente.getLista_cliente().get(i).getSaldo() > valor) {
+                            Cliente.getLista_cliente().get(i)
+                                    .setSaldo(Cliente.getLista_cliente().get(i).getSaldo() - valor);
+                            Cliente.getLista_cliente().get(i).setHistorico(-valor);
+                            Cliente.getLista_cliente().get(j)
+                                    .setSaldo(Cliente.getLista_cliente().get(j).getSaldo() + valor);
+                            Cliente.getLista_cliente().get(j).setHistorico(+valor);
+                            System.out.println("Transferencia Concluida");
+                            return;
+                        }
+                    }
+                }
+            } else {
+                System.out.println("CPF não consta nos registros");
+            }
+        }
     }
-    public void criar_funcionario(){
-    //nome,cpf,data_nasc,login,senha,Endereco endereco,double salario, String ctps, boolean ativo,cargo
-    
-    String nome,cpf,data_nasc,login,senha1,senha2,senha ="",ctps,cargo;
-    String rua,bairro,cidade,complemente,cep,uf;
-    double salario;
-    int numero;
-    UnidadeFederal uf1;
-    System.out.println("Digite o nome do funcionario:");
-    nome = sc.nextLine();
-    System.out.println("Digite o cpf:");
-    cpf = sc.nextLine();
-    System.out.println("Digite a data de nascimento:");
-    data_nasc = sc.nextLine();
-    System.out.println("Digite o login:");
-    login = sc.nextLine();
-    System.out.println("Digite uma senha:");
-    senha1 = sc.nextLine();
-    System.out.println("Digite a senha novamente: ");
-    senha2= sc.nextLine();
-    if (senha1.equals(senha2)) {
-        senha= sc.nextLine();
-    }else{
-        System.out.println("Senha invalida");
+
+    public void criar_funcionario() {
+        // nome,cpf,data_nasc,login,senha,Endereco endereco,double salario, String ctps,
+        // boolean ativo,cargo
+
+        String nome, cpf, data_nasc, login, senha1, senha2, senha = "", cargo;
+        String rua, bairro, cidade, complemente, cep, uf;
+        double salario;
+        int numero;
+        UnidadeFederal uf1;
+        System.out.println("Digite o nome do funcionario:");
+        nome = sc.nextLine();
+        System.out.println("Digite o cpf:");
+        cpf = sc.nextLine();
+        System.out.println("Digite a data de nascimento:");
+        data_nasc = sc.nextLine();
+        System.out.println("Digite o login:");
+        login = sc.nextLine();
+        System.out.println("Digite uma senha:");
+        senha1 = sc.nextLine();
+        System.out.println("Digite a senha novamente: ");
+        senha2 = sc.nextLine();
+        if (senha1.equals(senha2)) {
+            senha = sc.nextLine();
+        } else {
+            System.out.println("Senha invalida");
+        }
+        System.out.println("Digite o cargo do funcionario: ");
+        cargo = sc.nextLine();
+        System.out.println("Digite o salario do funcionario: ");
+        sc.next();
+        salario = sc.nextDouble();
+        // rua bairro numero cidade complemente cep uf
+        System.out.println("Digite o seu estado: ");
+        uf = sc.nextLine().toUpperCase();
+        uf1 = UnidadeFederal.valueOf(uf);
+        System.out.println("Digite a cidade: ");
+        cidade = sc.nextLine();
+        System.out.println("Digite o bairro: ");
+        bairro = sc.nextLine();
+        System.out.println("Digite a rua: ");
+        rua = sc.nextLine();
+        System.out.println("Digite o numero");
+        sc.next();
+        numero = sc.nextInt();
+        System.out.println("Digite o complemento");
+        complemente = sc.nextLine();
+        System.out.println("Digite o CEP: ");
+        cep = sc.nextLine();
+        Endereco endereco = new Endereco(bairro, rua, numero, complemente, cidade, cep, uf1);
+        if (cargo.equalsIgnoreCase("gerente")) {
+            Gerente gerente = new Gerente(nome, cpf, data_nasc, login, senha, endereco, salario, cpf, cep, agencia,
+                    isAtivo(), cargo);
+            Funcionario.getLista_funcionario().add(gerente);
+            System.out.println("Operação realizada com sucesso");
+        } else {
+            Caixa caixa = new Caixa(nome, cpf, data_nasc, login, senha, endereco, salario, cpf, isAtivo(), cargo);
+            Funcionario.getLista_funcionario().add(caixa);
+            System.out.println("Operação realizada com sucesso");
+        }
     }
-    System.out.println("Digite a CTPS: ");
-    ctps = sc.nextLine();
-    System.out.println("Digite o cargo do funcionario: ");
-    cargo = sc.nextLine();
-    System.out.println("Digite o salario do funcionario: ");
-    sc.next();
-    salario = sc.nextDouble();
-    //rua bairro numero cidade complemente cep uf
-    System.out.println("Digite o seu estado: ");
-    uf = sc.nextLine().toUpperCase();
-    uf1 = UnidadeFederal.valueOf(uf);
-    System.out.println("Digite a cidade: ");
-    cidade = sc.nextLine();
-    System.out.println("Digite o bairro: ");
-    bairro = sc.nextLine();
-    System.out.println("Digite a rua: ");
-    rua = sc.nextLine();
-    System.out.println("Digite o numero");
-    sc.next();
-    numero = sc.nextInt();
-    System.out.println("Digite o complemento");
-    complemente = sc.nextLine();
-    System.out.println("Digite o CEP: "); 
-    cep = sc.nextLine();
-    Endereco endereco = new Endereco(bairro, rua, numero, complemente, cidade, cep, uf1);
-    if (cargo.equalsIgnoreCase("gerente")){
-        Gerente gerente = new Gerente(nome, cpf, data_nasc, login, senha, endereco, salario, cpf, cep, agencia, isAtivo(), cargo);
-        Funcionario.getLista_funcionario().add(gerente);
-        System.out.println("Operação realizada com sucesso");
-    } else {
-        Caixa caixa = new Caixa(nome, cpf, data_nasc, login, senha, endereco, salario, cpf, isAtivo(), cargo);
-        Funcionario.getLista_funcionario().add(caixa);
-        System.out.println("Operação realizada com sucesso");
+
+    // metodo excluir atualizar funcionario
+    public void excluir_funcionario() {
+        System.out.println("Qual o CPF que deseja modificar?");
+        String cpf = sc.nextLine();
+
+        for (int i = 0; i < Funcionario.getLista_funcionario().size(); i++) {
+            if (Funcionario.getLista_funcionario().get(i).getCpf().equals(cpf)) {
+                Funcionario.getLista_funcionario().get(i).setAtivo(false);
+                break;
+            }
+        }
     }
+
+    public void atualizar_funcionario() {
+        // atualizar todas infos do funcionario
+
+        // nome,cpf,data_nascimento,login,senha,cargo
+        // bairro,rua,numero,complemento,cidade,cep,Localidade
+        String cpf;
+        System.out.println("CPF do cliente: ");
+        cpf = sc.nextLine();
+        for (int i = 0; i < Funcionario.getLista_funcionario().size(); i++) {
+            if (cpf.equals(Funcionario.getLista_funcionario().get(i).getCpf())) {
+                int escolha = 0;
+                while (escolha != 1 || escolha != 2) {
+                    System.out.println(
+                            "1.Para mudar dados do funcionario\n2.Para mudar dados do endereço do funcionario");
+                    escolha = sc.nextInt();
+                }
+                if (escolha == 1) {
+                    String[] opcoes = { "Nome", "CPF", "Data de nascimento", "Login", "Senha", "Cargo",
+                            "Gerente" };
+                    for (int j = 0; j < opcoes.length; j++) {
+                        System.out.println(opcoes[j] + "\n");
+                    }
+                    String mudança = sc.nextLine().toLowerCase();
+                    switch (mudança) {
+                        case "nome":
+                            System.out.println("Qual o nome desejado?");
+                            String nome = sc.nextLine();
+                            Funcionario.getLista_funcionario().get(i).setNome(nome);
+                            break;
+                        case "cpf":
+                            System.out.println("Qual o CPF desejado?");
+                            String cpf1 = sc.nextLine();
+                            Funcionario.getLista_funcionario().get(i).setCpf(cpf1);
+                            break;
+                        case "data de nascimento":
+                            System.out.println("Qual a data desejado?");
+                            String data = sc.nextLine();
+                            Funcionario.getLista_funcionario().get(i).setData_nasc(data);
+                            break;
+                        case "login":
+                            System.out.println("Qual o Login desejado?");
+                            String login = sc.nextLine();
+                            Funcionario.getLista_funcionario().get(i).setLogin(login);
+                            break;
+                        case "senha":
+                            System.out.println("Qual a senha desejada?");
+                            String senha = sc.nextLine();
+                            Funcionario.getLista_funcionario().get(i).setSenha(senha);
+                            break;
+                        case "tipo conta":
+                            System.out.println("Qual o tipo desejado?");
+                            String cargo = sc.nextLine();
+                            Funcionario.getLista_funcionario().get(i).setCargo(cargo);
+                            break;
+                        default:
+                            System.out.println("Opção Inválida");
+                            break;
+                    }
+                    break;
+                } else if (escolha == 2) {
+                    String[] opcoes = { "Bairro", "Rua", "Número", "Complemento", "Cidade", "CEP", "UF" };
+                    for (int j = 0; j < opcoes.length; j++) {
+                        System.out.println(opcoes[j] + "\n");
+                    }
+                    String mudança = sc.nextLine().toLowerCase();
+                    switch (mudança) {
+                        case "bairro":
+                            System.out.println("Qual o bairro desejado?");
+                            String bairro = sc.nextLine();
+                            Funcionario.getLista_funcionario().get(i).getEndereco().setBairro(bairro);
+                            break;
+                        case "rua":
+                            System.out.println("Qual a rua desejada?");
+                            String rua = sc.nextLine();
+                            Funcionario.getLista_funcionario().get(i).getEndereco().setRua(rua);
+                            ;
+                            break;
+                        case "numero":
+                            System.out.println("Qual o numero desejado?");
+                            sc.next();
+                            int numero = sc.nextInt();
+                            sc.next();
+                            Funcionario.getLista_funcionario().get(i).getEndereco().setNumero(numero);
+                            break;
+                        case "complemento":
+                            System.out.println("Qual o complemento desejado?");
+                            String comp = sc.nextLine();
+                            Funcionario.getLista_funcionario().get(i).getEndereco().setComplemento(comp);
+                            break;
+                        case "cidade":
+                            System.out.println("Qual a cidade desejada?");
+                            String cidade = sc.nextLine();
+                            Funcionario.getLista_funcionario().get(i).getEndereco().setCidade(cidade);
+                            break;
+                        case "cep":
+                            System.out.println("Qual o CEP desejado?");
+                            String cep = sc.nextLine();
+                            Funcionario.getLista_funcionario().get(i).getEndereco().setCep(cep);
+                            ;
+                            break;
+                        case "uf":
+                            UnidadeFederal uf;
+                            System.out.println("Qual a UF?");
+                            String uf1 = sc.nextLine().toUpperCase();
+                            uf = UnidadeFederal.valueOf(uf1);
+                            Funcionario.getLista_funcionario().get(i).getEndereco().setUf(uf);
+                            break;
+                        default:
+                            System.out.println("Opção Inválida");
+                            break;
+                    }
+                } else {
+                    System.out.println("Opção Inválida");
+                }
+            }
+        }
+
     }
-  
-// Gerente responsável por vários clientes   
+
+    public void ver_lista_func() {
+        for (int i = 0; i < Funcionario.getLista_funcionario().size(); i++) {
+            System.out.println(Funcionario.getLista_funcionario().get(i).getNome() + ""
+                    + Funcionario.getLista_funcionario().get(i).getCargo());
+        }
+    }
+
+    public void ver_lista_cliente() {
+        for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
+            System.out.println(Cliente.getLista_cliente().get(i).getNome());
+        }
+    }
 }
