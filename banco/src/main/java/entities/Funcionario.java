@@ -1,10 +1,15 @@
 package entities;
-
-
 import java.util.ArrayList;
-
 import interfaces.Cadastro;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+
+
+
+
+@Entity
+@Table(name = "funcionario")
 public abstract class Funcionario extends Pessoa implements Cadastro{
     private double salario;
     private String cargo;

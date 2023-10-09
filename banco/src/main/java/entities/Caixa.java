@@ -15,7 +15,7 @@ public class Caixa extends Funcionario {
 
     @Override
     public void criar() {
-        
+        //
         String nome, cpf, data_nac, login, senha, tipo_conta, gerente, complemento,cep;
         double saldo;
         int numero;

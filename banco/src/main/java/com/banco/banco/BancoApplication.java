@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class BancoApplication {
 
 	public static void main(String[] args) {
+      //add tabelas para gerente, caixa, historico e cliente.
 		SpringApplication.run(BancoApplication.class, args);
       Endereco teste = Endereco.getEnderecoByCep("25720160");
       Caixa funcionario_base = new Caixa("Base", null, null, "adm", "adm", teste, 0, null, false, "caixa");

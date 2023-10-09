@@ -4,22 +4,27 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import interfaces.Cadastro;
-//import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-//@Data
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Entity
+@Table(name = "cliente")
 public class Cliente extends Pessoa implements Cadastro {
 
     Scanner sc = new Scanner(System.in);
     Scanner sc2 = new Scanner(System.in);
 
     private static ArrayList<Cliente> lista_cliente = new ArrayList<>();
-
     private double saldo;
     private String tipoConta;
     private static Random rand = new Random();
     private static double numeroConta = rand.nextDouble();
     private String gerente;
-    private ArrayList<Double> historico = new ArrayList<>();
+    private ArrayList<Double> historico = new ArrayList<>();//add uma string ao inves de uma tabela nova e criar classe historico
 
     public Cliente(String nome, String cpf, String data_nasc, String login, String senha,
             Endereco endereco, double saldo, String tipoConta, String gerente, boolean ativo,
@@ -154,8 +159,9 @@ public class Cliente extends Pessoa implements Cadastro {
     public void extrato() { // falta adicionar o saldo final da pessoa 09.10.2023
         if (historico.size() > 0) {
             for (int i = 0; i < historico.size(); i++) {
-                System.out.println("R$" + historico.get(i));
+                System.out.println("R$" + historico.get(i));            
             }
+            System.out.println("Saldo R$:" + this.saldo);
         } else {
             System.out.println("Sem operações ainda");
         }
@@ -177,8 +183,8 @@ public class Cliente extends Pessoa implements Cadastro {
                     getLista_cliente().get(i).setSaldo((getLista_cliente().get(i).getSaldo()) + valor);
                     getLista_cliente().get(i).setHistorico(valor);
                     System.out.println("Operação realizado com sucesso");
-                    break;
-                }
+                    return;
+                } 
             }
         } else {
             System.out.println("Saldo insuficiente");

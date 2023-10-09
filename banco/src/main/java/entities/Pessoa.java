@@ -1,7 +1,14 @@
 package entities;
 
-//@Data
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import lombok.Data;
+
+@Data
+@MappedSuperclass
 public abstract class Pessoa {
+    @Id
+    private Long id;
     private String nome;
     private String cpf;
     private String data_nasc;

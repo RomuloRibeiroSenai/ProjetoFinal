@@ -15,10 +15,10 @@ public class menu_inicial {
         login_digitado = sc.nextLine();
         System.out.println("digite sua senha: ");
         senha_digitada = sc.nextLine();
+        System.out.println();
         String tipo_menu = login(login_digitado, senha_digitada, Funcionario.getLista_funcionario(),
                 Cliente.getLista_cliente());
-        System.out.println(tipo_menu);
-
+        
         switch (tipo_menu) {
             case "cliente":
                 this.menu_cliente(login_digitado, senha_digitada);
@@ -73,43 +73,50 @@ public class menu_inicial {
     }
 
     public void menu_gerente(String login, String senha) {
-        // gerente exclui,acrescenta, atualiza cadastro,ver lista// add loop menu 09.10.2023
+        // gerente exclui,acrescenta, atualiza cadastro,ver lista// add loop menu
+        // 09.10.2023
         int escolha = 0;
         for (int j = 0; j < Funcionario.getLista_funcionario().size(); j++) {
             if (login.equals(Funcionario.getLista_funcionario().get(j).getLogin())) {
-                System.out.println(
-                        "1.Ver funcionarios\n2.Ver lista de clientes\n3.Ver Cliente\n4.Cadastrar cliente\n5.Cadastrar funcionario\n6.Atualizar cadastro cliente\n7.Atualizar cadastro funcionario");
-                escolha = sc.nextInt();
+                while (escolha != 8) {
+                    System.out.println(
+                            "1.Ver funcionarios\n2.Ver lista de clientes\n3.Ver Cliente\n4.Cadastrar cliente\n5.Cadastrar funcionario\n6.Atualizar cadastro cliente\n7.Atualizar cadastro funcionario\n8-sair");
 
-                switch (escolha) {
-                    case 1:
-                        ((Gerente) Funcionario.getLista_funcionario().get(j)).ver_lista_func();// perguntar arthur 
-                        break;
-                    case 2:
-                        ((Gerente) Funcionario.getLista_funcionario().get(j)).ver_lista_cliente();
-                        break;
-                    case 3:
-                        ((Gerente) Funcionario.getLista_funcionario().get(j)).ver();
-                        break;
-                    case 4:
-                        ((Gerente) Funcionario.getLista_funcionario().get(j)).criar();
-                        break;
-                    case 5:
-                        ((Gerente) Funcionario.getLista_funcionario().get(j)).criar_funcionario();
-                        break;
-                    case 6:
-                        ((Gerente) Funcionario.getLista_funcionario().get(j)).atualizar();
-                        break;
-                    case 7:
-                        ((Gerente) Funcionario.getLista_funcionario().get(j)).atualizar_funcionario();
-                        break;
-                    default:
-                        System.out.println("Opção Inválida");
-                        break;
+                    escolha = sc.nextInt();
+
+                    switch (escolha) {
+                        case 1:
+                            ((Gerente) Funcionario.getLista_funcionario().get(j)).ver_lista_func();// perguntar arthur
+                            break;
+                        case 2:
+                            ((Gerente) Funcionario.getLista_funcionario().get(j)).ver_lista_cliente();
+                            break;
+                        case 3:
+                            ((Gerente) Funcionario.getLista_funcionario().get(j)).ver();
+                            break;
+                        case 4:
+                            ((Gerente) Funcionario.getLista_funcionario().get(j)).criar();
+                            break;
+                        case 5:
+                            ((Gerente) Funcionario.getLista_funcionario().get(j)).criar_funcionario();
+                            break;
+                        case 6:
+                            ((Gerente) Funcionario.getLista_funcionario().get(j)).atualizar();
+                            break;
+                        case 7:
+                            ((Gerente) Funcionario.getLista_funcionario().get(j)).atualizar_funcionario();
+                            break;
+                        case 8:
+                            System.out.println("Até mais");
+                            break;
+                        default:
+                            System.out.println("Opção Inválida");
+                            break;
+                    }
                 }
             }
         }
-        
+
     }
 
     public void menu_caixa(String login, String senha) {
