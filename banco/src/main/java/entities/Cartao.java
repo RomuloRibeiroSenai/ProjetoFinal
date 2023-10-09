@@ -27,7 +27,7 @@ public class Cartao implements Cadastro{
 	}
 	@Override
 	public void atualizar() {
-		// TODO Auto-generated method stub
+		// tentar colocar nesse metodo para ele atualizar a senha do cartão
 		throw new UnsupportedOperationException("Unimplemented method 'atualizar'");
 	}
 	@Override
@@ -37,22 +37,22 @@ public class Cartao implements Cadastro{
 	}
 	@Override
 	public void ver() {
-		// TODO Auto-generated method stub
+		// colocar talvez o historico de compras ou todos os cartoes que ele tem
 		throw new UnsupportedOperationException("Unimplemented method 'ver'");
 	}
 	@Override
 	public void saldo() {
-		// TODO Auto-generated method stub
+		// tentar implementar a ideia do anderson de o limite ser de acordo com o saldo da pessoa ou para ele ver o saldo que ele ainda tem de credito
 		throw new UnsupportedOperationException("Unimplemented method 'saldo'");
 	}
 	@Override
 	public void deposito() {
-		// TODO Auto-generated method stub
+		// usar esse metodo para aumentar o valor de credito dele
 		throw new UnsupportedOperationException("Unimplemented method 'deposito'");
 	}
 	@Override
 	public void saque() {
-		// TODO Auto-generated method stub
+		// metodo responsavel pela compra
 		throw new UnsupportedOperationException("Unimplemented method 'saque'");
 	}
 	@Override

@@ -73,7 +73,7 @@ public class menu_inicial {
     }
 
     public void menu_gerente(String login, String senha) {
-        // gerente exclui,acrescenta, atualiza cadastro,ver lista
+        // gerente exclui,acrescenta, atualiza cadastro,ver lista// add loop menu 09.10.2023
         int escolha = 0;
         for (int j = 0; j < Funcionario.getLista_funcionario().size(); j++) {
             if (login.equals(Funcionario.getLista_funcionario().get(j).getLogin())) {
