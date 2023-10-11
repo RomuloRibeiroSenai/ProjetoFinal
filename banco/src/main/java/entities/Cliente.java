@@ -1,5 +1,6 @@
 package entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -128,7 +129,10 @@ public class Cliente extends Pessoa implements Cadastro {
         for (int i = 0; i < getLista_cliente().size(); i++) {
             if (cpf.equals(getLista_cliente().get(i).getCpf())) {
                 getLista_cliente().get(i).setSaldo((getLista_cliente().get(i).getSaldo()) + valor);
+                String nome = getLista_cliente().get(i).getNome();
+                LocalDate data = LocalDate.now();
                 this.setHistorico(valor);
+                Extrato.setExtrato_geral(nome, cpf, valor, data);
                 System.out.println("\nDeposito realizado com sucesso:");
                 return;
             } 
@@ -147,7 +151,10 @@ public class Cliente extends Pessoa implements Cadastro {
         if (valor <= this.saldo) {
             this.saldo -= valor;
             System.out.println("valor transferido com sucesso: ");
+            String nome = this.getNome();
+            LocalDate data = LocalDate.now();
             this.setHistorico(-valor);
+            Extrato.setExtrato_geral(nome, this.getCpf(), -valor, data);
 
         } else {
             System.out.println("Saldo insuficiente.");
@@ -156,14 +163,26 @@ public class Cliente extends Pessoa implements Cadastro {
     }
 
     @Override
-    public void extrato() { // falta adicionar o saldo final da pessoa 09.10.2023
-        if (historico.size() > 0) {
-            for (int i = 0; i < historico.size(); i++) {
-                System.out.println("R$" + historico.get(i));            
+    public void extrato(String cpf) { 
+                int contador = 0;
+        // falta adicionar o saldo final da pessoa 09.10.2023
+        // if (historico.size() > 0) {
+        //     for (int i = 0; i < historico.size(); i++) {
+        //         System.out.println("R$" + historico.get(i));            
+        //     }
+        //     System.out.println("Saldo R$:" + this.saldo);
+        // } else {
+        //     System.out.println("Sem operações ainda");
+        // }
+        for (int i = 0; i < Extrato.getExtrato_geral().size(); i++) {
+            if (cpf.equals(Extrato.getExtrato_geral().get(i).getCpf())) {
+                System.out.println(Extrato.getExtrato_geral().get(i).getData()+" R$:"+ Extrato.getExtrato_geral().get(i).getValor() );
+                contador += 1;
             }
-            System.out.println("Saldo R$:" + this.saldo);
-        } else {
-            System.out.println("Sem operações ainda");
+            
+        }
+        if (contador == 0){
+            System.out.println("\nSem operações");
         }
     }
 

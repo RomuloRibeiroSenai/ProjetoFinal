@@ -248,21 +248,32 @@ public class Gerente extends Funcionario {
     }
 
     @Override
-    public void extrato() {
-        System.out.println("Qual o CPF que deseja ver?");
-        String cpf = sc.nextLine();
+    public void extrato(String cpf) {
+        int contador = 0;
+        // System.out.println("Qual o CPF que deseja ver?");
+        // String cpf = sc.nextLine();
 
-        for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
-            if (cpf.equals(Cliente.getLista_cliente().get(i).getCpf())) {
-                if (Cliente.getLista_cliente().get(i).getHistorico().size() > 0) {
-                    for (int j = 0; j < Cliente.getLista_cliente().get(i).getHistorico().size(); j++) {
-                        System.out.println("R$" + Cliente.getLista_cliente().get(i).getHistorico().get(j));
-                    }
-                } else {
-                    System.out.println("Sem operações ainda");
-                }
-                break;
+        // for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
+        //     if (cpf.equals(Cliente.getLista_cliente().get(i).getCpf())) {
+        //         if (Cliente.getLista_cliente().get(i).getHistorico().size() > 0) {
+        //             for (int j = 0; j < Cliente.getLista_cliente().get(i).getHistorico().size(); j++) {
+        //                 System.out.println("R$" + Cliente.getLista_cliente().get(i).getHistorico().get(j));
+        //             }
+        //         } else {
+        //             System.out.println("Sem operações ainda");
+        //         }
+        //         break;
+        //     }
+        // }
+        for (int i = 0; i < Extrato.getExtrato_geral().size(); i++) {
+            if (cpf.equals(Extrato.getExtrato_geral().get(i).getCpf())) {
+                System.out.println(Extrato.getExtrato_geral().get(i).getData()+" R$:"+ Extrato.getExtrato_geral().get(i).getValor() );
+                contador += 1;
             }
+            
+        }
+        if (contador == 0){
+            System.out.println("\nSem operações");
         }
     }
 
@@ -524,14 +535,19 @@ public class Gerente extends Funcionario {
 
     public void ver_lista_func() {
         for (int i = 0; i < Funcionario.getLista_funcionario().size(); i++) {
-            System.out.println(Funcionario.getLista_funcionario().get(i).getNome() + " "
+            if (Funcionario.getLista_funcionario().get(i).isAtivo()){
+                    System.out.println(Funcionario.getLista_funcionario().get(i).getNome() + " "
                     + Funcionario.getLista_funcionario().get(i).getCargo());
+                }
         }
     }
 
     public void ver_lista_cliente() {
         for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
-            System.out.println(Cliente.getLista_cliente().get(i).getNome());
+            
+            if (Cliente.getLista_cliente().get(i).isAtivo()){
+                System.out.println(Cliente.getLista_cliente().get(i).getNome());
+            }
         }
     }
 }

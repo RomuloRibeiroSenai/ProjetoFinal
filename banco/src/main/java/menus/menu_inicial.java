@@ -30,7 +30,7 @@ public class menu_inicial {
                 this.menu_caixa(login_digitado, senha_digitada);
                 break;
             default:
-                System.out.println("Erro!!!!!!!!!!!!!!");
+                System.out.println("Erro!!!");
                 break;
         }
     }
@@ -57,7 +57,9 @@ public class menu_inicial {
                             Cliente.getLista_cliente().get(i).transferencia();
                             break;
                         case 5:
-                            Cliente.getLista_cliente().get(i).extrato();
+                            System.out.println("Qual o CPF que deseja ver?");
+                            String cpf = sc.nextLine();
+                            Cliente.getLista_cliente().get(i).extrato(cpf);
                             break;
                         case 6:
                             System.out.println("Até Mais");

@@ -221,7 +221,7 @@ public class Caixa extends Funcionario {
     }
 
     @Override
-    public void extrato() {
+    public void extrato(String cpf) {
         
     }
 

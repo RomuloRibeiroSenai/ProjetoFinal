@@ -9,6 +9,6 @@ public interface Cadastro {
     void saldo();
     void deposito();
     void saque();
-    void extrato();
+    void extrato(String cpf);
     void transferencia();
 }
