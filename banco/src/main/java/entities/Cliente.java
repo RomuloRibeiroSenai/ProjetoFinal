@@ -150,7 +150,7 @@ public class Cliente extends Pessoa implements Cadastro {
         valor = sc.nextDouble();
         if (valor <= this.saldo) {
             this.saldo -= valor;
-            System.out.println("valor transferido com sucesso: ");
+            System.out.println("saque realizado com sucesso: ");
             String nome = this.getNome();
             LocalDate data = LocalDate.now();
             this.setHistorico(-valor);
@@ -180,8 +180,7 @@ public class Cliente extends Pessoa implements Cadastro {
                 contador += 1;
             }
             
-        }
-        if (contador == 0){
+        }if (contador == 0){
             System.out.println("\nSem operações");
         }
     }

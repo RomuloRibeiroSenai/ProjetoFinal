@@ -250,8 +250,9 @@ public class Gerente extends Funcionario {
     @Override
     public void extrato(String cpf) {
         int contador = 0;
-        // System.out.println("Qual o CPF que deseja ver?");
-        // String cpf = sc.nextLine();
+
+        System.out.println("Qual o CPF que deseja ver?");
+        String cpf1 = sc.nextLine();
 
         // for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
         //     if (cpf.equals(Cliente.getLista_cliente().get(i).getCpf())) {
@@ -266,7 +267,7 @@ public class Gerente extends Funcionario {
         //     }
         // }
         for (int i = 0; i < Extrato.getExtrato_geral().size(); i++) {
-            if (cpf.equals(Extrato.getExtrato_geral().get(i).getCpf())) {
+            if (cpf1.equals(Extrato.getExtrato_geral().get(i).getCpf())) {
                 System.out.println(Extrato.getExtrato_geral().get(i).getData()+" R$:"+ Extrato.getExtrato_geral().get(i).getValor() );
                 contador += 1;
             }

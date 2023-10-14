@@ -1,5 +1,6 @@
 package entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -212,7 +213,27 @@ public class Caixa extends Funcionario {
 
     @Override
     public void deposito() {
-        
+         double valor;
+        String cpf;
+        System.out.println("Para qual cpf você deseja depositar? ");
+        cpf = sc.nextLine();
+        System.out.println("Digite o valor: ");
+
+        valor = sc2.nextDouble(); // fazer um try catch
+        for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
+            if (cpf.equals(Cliente.getLista_cliente().get(i).getCpf())) {
+                Cliente.getLista_cliente().get(i).setSaldo((Cliente.getLista_cliente().get(i).getSaldo()) + valor);
+                String nome = Cliente.getLista_cliente().get(i).getNome();
+                LocalDate data = LocalDate.now();
+                Cliente.getLista_cliente().get(i).setHistorico(valor);
+                Extrato.setExtrato_geral(nome, cpf, valor, data);
+                System.out.println("\nDeposito realizado com sucesso:");
+                return;
+            } 
+                System.out.println("\nConta inexistente.");
+
+        }
+ 
     }
 
     @Override

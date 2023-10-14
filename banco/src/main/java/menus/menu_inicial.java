@@ -18,7 +18,7 @@ public class menu_inicial {
         System.out.println();
         String tipo_menu = login(login_digitado, senha_digitada, Funcionario.getLista_funcionario(),
                 Cliente.getLista_cliente());
-        
+
         switch (tipo_menu) {
             case "cliente":
                 this.menu_cliente(login_digitado, senha_digitada);
@@ -39,8 +39,9 @@ public class menu_inicial {
         for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
             if (login.equals(Cliente.getLista_cliente().get(i).getLogin())) {
                 int escolha = 0;
-                while (escolha != 6) {
-                    System.out.println("\n1.Ver saldo\n2.Depositar\n3.Sacar\n4.Transferir\n5.Extrato\n6.Sair");
+                while (escolha != 7) {
+                    System.out.println(
+                            "\n1.Ver saldo\n2.Depositar\n3.Sacar\n4.Transferir\n5.Extrato\n6.Para verficar suas informações\n7.Para sair");
                     escolha = sc.nextInt();
                     switch (escolha) {
                         case 1:
@@ -57,11 +58,13 @@ public class menu_inicial {
                             Cliente.getLista_cliente().get(i).transferencia();
                             break;
                         case 5:
-                            System.out.println("Qual o CPF que deseja ver?");
-                            String cpf = sc.nextLine();
+                            String cpf = Cliente.getLista_cliente().get(i).getCpf();
                             Cliente.getLista_cliente().get(i).extrato(cpf);
                             break;
                         case 6:
+                            Cliente.getLista_cliente().get(i).ver();
+                            break;
+                        case 7:
                             System.out.println("Até Mais");
                             break;
                         default:
@@ -80,9 +83,9 @@ public class menu_inicial {
         int escolha = 0;
         for (int j = 0; j < Funcionario.getLista_funcionario().size(); j++) {
             if (login.equals(Funcionario.getLista_funcionario().get(j).getLogin())) {
-                while (escolha != 8) {
+                while (escolha != 11) {
                     System.out.println(
-                            "1.Ver funcionarios\n2.Ver lista de clientes\n3.Ver Cliente\n4.Cadastrar cliente\n5.Cadastrar funcionario\n6.Atualizar cadastro cliente\n7.Atualizar cadastro funcionario\n8-sair");
+                            "1.Ver lista de funcionarios\n2.Ver lista de clientes\n3.Ver informações do Cliente\n4.Cadastrar cliente\n5.Cadastrar funcionario\n6.Atualizar cadastro cliente\n7.Atualizar cadastro funcionario\n8.Para excluir um cliente\n9.Para exluir um funcionario\n10.Para o extrato do cliente\n11.Para sair");
 
                     escolha = sc.nextInt();
 
@@ -109,6 +112,16 @@ public class menu_inicial {
                             ((Gerente) Funcionario.getLista_funcionario().get(j)).atualizar_funcionario();
                             break;
                         case 8:
+                            ((Gerente) Funcionario.getLista_funcionario().get(j)).excluir();
+                            ;
+                            break;
+                        case 9:
+                            ((Gerente) Funcionario.getLista_funcionario().get(j)).excluir_funcionario();
+                            break;
+                        case 10:
+                            ((Gerente) Funcionario.getLista_funcionario().get(j)).extrato("");
+                            break;
+                        case 11:
                             System.out.println("Até mais");
                             break;
                         default:
@@ -123,29 +136,36 @@ public class menu_inicial {
 
     public void menu_caixa(String login, String senha) {
         // gerente exclui,acrescenta, atualiza cadastro,ver lista
+        int escolha = 0;
         for (int j = 0; j < Funcionario.getLista_funcionario().size(); j++) {
             if (login.equals(Funcionario.getLista_funcionario().get(j).getLogin())) {
-                System.out.println("1.Criar cliente\n2.Atualizar cadastro do cliente\n3.Realizar Depósito\n4.Sair");// 3.Consultar
-                                                                                                                    // saldo\n4.Realizar
-                // deposito\n5.Sacar
-                int escolha = sc.nextInt();
 
-                switch (escolha) {
-                    case 1:
-                        Funcionario.getLista_funcionario().get(j).criar();
-                        break;
-                    case 2:
-                        Funcionario.getLista_funcionario().get(j).atualizar();
-                        break;
-                    case 3:
-                        Cliente.getLista_cliente().get(j).deposito();
-                        break;
-                    case 4:
-                        System.out.println("Até mais");
-                        break;
-                    default:
-                        System.out.println("Opção Inválida");
-                        break;
+                while (escolha !=5) {
+                    System.out.println("\n1.Criar cliente\n2.Atualizar cadastro do cliente\n3.Realizar Depósito\n4.Ver informações do cliente\n5.Para sair.");// 3.Consultar
+                                                                                                                        // saldo\n4.Realizar
+                    // deposito\n5.Sacar
+                    escolha = sc.nextInt();
+                    
+                    switch (escolha) {
+                        case 1:
+                            Funcionario.getLista_funcionario().get(j).criar();
+                            break;
+                        case 2:
+                            Funcionario.getLista_funcionario().get(j).atualizar();
+                            break;
+                        case 3:
+                            Funcionario.getLista_funcionario().get(j).deposito();
+                            break;
+                        case 4:
+                            Funcionario.getLista_funcionario().get(j).ver();
+                            break;
+                            case 5:
+                            System.out.println("Até mais");
+                            break;
+                        default:
+                            System.out.println("Opção Inválida");
+                            break;
+                    }
                 }
 
             }
