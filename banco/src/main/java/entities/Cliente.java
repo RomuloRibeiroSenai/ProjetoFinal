@@ -144,10 +144,13 @@ public class Cliente extends Pessoa implements Cadastro {
 
     @Override
     public void saque() {
-        // criar saque e jogar dentro do historico
+        // criar uma pergunta para se a pessoa deseja entrar em cheque especial
         double valor;
         System.out.println("Digite o valor: ");
         valor = sc.nextDouble();
+        int resposta = 0;
+
+
         if (valor <= this.saldo) {
             this.saldo -= valor;
             System.out.println("saque realizado com sucesso: ");
@@ -157,8 +160,23 @@ public class Cliente extends Pessoa implements Cadastro {
             Extrato.setExtrato_geral(nome, this.getCpf(), -valor, data);
 
         } else {
-            System.out.println("Saldo insuficiente.");
+            if (resposta == 1 ) {
+                if (valor <= this.saldo+200) {
+                   this.saldo -= valor;
+                   System.out.println("saque realizado com sucesso: ");
+                   String nome = this.getNome();
+                   LocalDate data = LocalDate.now();
+                   this.setHistorico(-valor);
+                   Extrato.setExtrato_geral(nome, this.getCpf(), -valor, data);
+                    
+               }
+                
+            }
+            if (resposta == 2 ) {
+                System.out.println("Transação não realizada ");
+            }
         }
+            
 
     }
 
