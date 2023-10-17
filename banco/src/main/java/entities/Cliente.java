@@ -25,7 +25,8 @@ public class Cliente extends Pessoa implements Cadastro {
     private static Random rand = new Random();
     private static double numeroConta = rand.nextDouble();
     private String gerente;
-    private ArrayList<Double> historico = new ArrayList<>();//add uma string ao inves de uma tabela nova e criar classe historico
+    private ArrayList<Double> historico = new ArrayList<>();// add uma string ao inves de uma tabela nova e criar classe
+                                                            // historico
 
     public Cliente(String nome, String cpf, String data_nasc, String login, String senha,
             Endereco endereco, double saldo, String tipoConta, String gerente, boolean ativo,
@@ -135,8 +136,8 @@ public class Cliente extends Pessoa implements Cadastro {
                 Extrato.setExtrato_geral(nome, cpf, valor, data);
                 System.out.println("\nDeposito realizado com sucesso:");
                 return;
-            } 
-                System.out.println("\nConta inexistente.");
+            }
+            System.out.println("\nConta inexistente.");
 
         }
 
@@ -148,8 +149,6 @@ public class Cliente extends Pessoa implements Cadastro {
         double valor;
         System.out.println("Digite o valor: ");
         valor = sc.nextDouble();
-        int resposta = 0;
-
 
         if (valor <= this.saldo) {
             this.saldo -= valor;
@@ -159,46 +158,54 @@ public class Cliente extends Pessoa implements Cadastro {
             this.setHistorico(-valor);
             Extrato.setExtrato_geral(nome, this.getCpf(), -valor, data);
 
-        } else {
-            if (resposta == 1 ) {
-                if (valor <= this.saldo+200) {
-                   this.saldo -= valor;
-                   System.out.println("saque realizado com sucesso: ");
-                   String nome = this.getNome();
-                   LocalDate data = LocalDate.now();
-                   this.setHistorico(-valor);
-                   Extrato.setExtrato_geral(nome, this.getCpf(), -valor, data);
-                    
-               }
-                
+        } else if (valor > this.saldo) {
+
+            System.out.println(
+                    "Saldo insuficiente deseja o cheque especial de 200 reais? Digite 1. para sim ou 2. para não");
+            int resposta = sc2.nextInt();
+
+            if (resposta == 1) {
+                if (valor <= this.saldo + 200) {
+                    this.saldo -= valor;
+                    System.out.println("saque realizado com sucesso: ");
+                    String nome = this.getNome();
+                    LocalDate data = LocalDate.now();
+                    this.setHistorico(-valor);
+                    Extrato.setExtrato_geral(nome, this.getCpf(), -valor, data);
+                } else {
+                    System.out.println("Transação não realizada valor maximo de R$" + (this.saldo + 200));
+                }
+
             }
-            if (resposta == 2 ) {
-                System.out.println("Transação não realizada ");
+            if (resposta == 2) {
+                System.out.println("Transação não realizada");
+
             }
         }
-            
 
     }
 
     @Override
-    public void extrato(String cpf) { 
-                int contador = 0;
+    public void extrato(String cpf) {
+        int contador = 0;
         // falta adicionar o saldo final da pessoa 09.10.2023
         // if (historico.size() > 0) {
-        //     for (int i = 0; i < historico.size(); i++) {
-        //         System.out.println("R$" + historico.get(i));            
-        //     }
-        //     System.out.println("Saldo R$:" + this.saldo);
+        // for (int i = 0; i < historico.size(); i++) {
+        // System.out.println("R$" + historico.get(i));
+        // }
+        // System.out.println("Saldo R$:" + this.saldo);
         // } else {
-        //     System.out.println("Sem operações ainda");
+        // System.out.println("Sem operações ainda");
         // }
         for (int i = 0; i < Extrato.getExtrato_geral().size(); i++) {
             if (cpf.equals(Extrato.getExtrato_geral().get(i).getCpf())) {
-                System.out.println(Extrato.getExtrato_geral().get(i).getData()+" R$:"+ Extrato.getExtrato_geral().get(i).getValor() );
+                System.out.println(Extrato.getExtrato_geral().get(i).getData() + " R$:"
+                        + Extrato.getExtrato_geral().get(i).getValor());
                 contador += 1;
             }
-            
-        }if (contador == 0){
+
+        }
+        if (contador == 0) {
             System.out.println("\nSem operações");
         }
     }
@@ -207,20 +214,26 @@ public class Cliente extends Pessoa implements Cadastro {
     public void transferencia() {
         String recebedor_cpf;
         double valor;
+        String nome_recebedor;
         System.out.println("Para qual CPF você deseja enviar ?");
         recebedor_cpf = sc.nextLine();
         System.out.println("Qual o valor?");
         valor = sc2.nextDouble();
+        String nome = this.getNome();
+        LocalDate data = LocalDate.now();
+        this.setHistorico(-valor);
+        Extrato.setExtrato_geral(nome, this.getCpf(), -valor, data);
         if (valor <= this.saldo) {
             for (int i = 0; i < getLista_cliente().size(); i++) {
                 if (recebedor_cpf.equals(getLista_cliente().get(i).getCpf())) {
                     this.saldo -= valor;
-                    this.setHistorico(-valor);
                     getLista_cliente().get(i).setSaldo((getLista_cliente().get(i).getSaldo()) + valor);
                     getLista_cliente().get(i).setHistorico(valor);
+                    nome_recebedor = getLista_cliente().get(i).getNome();
+                    Extrato.setExtrato_geral(nome_recebedor, recebedor_cpf, valor, data);
                     System.out.println("Operação realizado com sucesso");
                     return;
-                } 
+                }
             }
         } else {
             System.out.println("Saldo insuficiente");

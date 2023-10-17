@@ -7,31 +7,37 @@ import entities.*;
 
 public class menu_inicial {
     Scanner sc = new Scanner(System.in);
-
+    Scanner scint = new Scanner(System.in);
+    
     public void menus() {
-        String login_digitado, senha_digitada;
-        System.out.println("Seja bem-vindo!");
-        System.out.println("Digite Login:");
-        login_digitado = sc.nextLine();
-        System.out.println("digite sua senha: ");
-        senha_digitada = sc.nextLine();
-        System.out.println();
-        String tipo_menu = login(login_digitado, senha_digitada, Funcionario.getLista_funcionario(),
-                Cliente.getLista_cliente());
-
-        switch (tipo_menu) {
-            case "cliente":
-                this.menu_cliente(login_digitado, senha_digitada);
-                break;
-            case "gerente":
-                this.menu_gerente(login_digitado, senha_digitada); // so falta esse
-                break;
-            case "caixa":
-                this.menu_caixa(login_digitado, senha_digitada);
-                break;
-            default:
-                System.out.println("Erro!!!");
-                break;
+        int resposta = 0;
+        while (resposta !=2) {
+            System.out.println("digite 1 para iniciar ou 2 para sairr");
+            resposta = scint.nextInt();
+            String login_digitado, senha_digitada;
+            System.out.println("Seja bem-vindo!");
+            System.out.println("Digite Login:");
+            login_digitado = sc.nextLine();
+            System.out.println("digite sua senha: ");
+            senha_digitada = sc.nextLine();
+            System.out.println();
+            String tipo_menu = login(login_digitado, senha_digitada, Funcionario.getLista_funcionario(),
+                    Cliente.getLista_cliente());
+    
+            switch (tipo_menu) {
+                case "cliente":
+                    this.menu_cliente(login_digitado, senha_digitada);
+                    break;
+                case "gerente":
+                    this.menu_gerente(login_digitado, senha_digitada); // so falta esse
+                    break;
+                case "caixa":
+                    this.menu_caixa(login_digitado, senha_digitada);
+                    break;
+                default:
+                    System.out.println("Erro!!!");
+                    break;
+            }
         }
     }
 
