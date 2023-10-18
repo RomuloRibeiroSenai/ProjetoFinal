@@ -171,7 +171,7 @@ public class Caixa extends Funcionario {
     public void excluir() {
         // faz sim!!
         String cpf_digitado;
-        System.out.println("Digite o nome da pessoa que deseja excluir");
+        System.out.println("Digite o cpf da pessoa que deseja excluir");
         cpf_digitado = sc.nextLine();
         for (int i = 0; i < Cliente.getLista_cliente().size(); i++) {
             if (cpf_digitado.equalsIgnoreCase(Cliente.getLista_cliente().get(i).getCpf())) {
