@@ -177,7 +177,7 @@ public class Caixa extends Funcionario {
             if (cpf_digitado.equalsIgnoreCase(Cliente.getLista_cliente().get(i).getCpf())) {
                 // add metodo para inativar o cliente
                 Cliente.getLista_cliente().get(i).setAtivo(false);
-
+                System.out.println("Cliente Excluido");
             }
 
         }
